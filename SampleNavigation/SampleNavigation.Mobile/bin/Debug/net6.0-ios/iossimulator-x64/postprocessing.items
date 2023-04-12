@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_PostProcessingItem Include="SampleNavigation.Mobile.app/SampleNavigation.Mobile">
+      <BCSymbolMapName>SampleNavigation.Mobile.bcsymbolmap</BCSymbolMapName>
+      <NoDSymUtil>true</NoDSymUtil>
+      <dSYMSourcePathExists>false</dSYMSourcePathExists>
+      <NoSymbolStrip>true</NoSymbolStrip>
+      <dSYMInfoPlistRelativePath>SampleNavigation.Mobile.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
+      <SymbolFile>\Users\user\Library\Caches\Xamarin\mtbs\builds\SampleNavigation.Mobile\0eb8745053bef00fd2c322f5abdf39b6f0ec3306c7fd7da025b95b2a0810aa16\obj\Debug\net6.0-ios\iossimulator-x64\mtouch-symbols.list</SymbolFile>
+      <DSymName>SampleNavigation.Mobile.app.dSYM</DSymName>
+      <SourceProjectPath>C:\Test\NET_WinUI\Navigation\SampleNavigation\SampleNavigation.Mobile</SourceProjectPath>
+    </_PostProcessingItem>
+  </ItemGroup>
+</Project>

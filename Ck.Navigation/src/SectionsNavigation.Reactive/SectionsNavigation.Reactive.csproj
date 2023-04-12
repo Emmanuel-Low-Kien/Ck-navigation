@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<LangVersion>8.0</LangVersion>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<RootNamespace>Chinook.SectionsNavigation</RootNamespace>
+		<Authors>nventive</Authors>
+		<Company>nventive</Company>
+		<AssemblyName>Chinook.SectionsNavigation.Reactive</AssemblyName>
+		<PackageId>Chinook.SectionsNavigation.Reactive</PackageId>
+		<Description>Unified cross-platform tools to perform ViewModel-based navigation.</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>navigation;mvvm;xamarin;ios;android;uwp;chinook;maui;winui</PackageTags>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/nventive/Chinook.Navigation</PackageProjectUrl>
+
+		<!-- Needed for Source Link support -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Reactive" Version="4.4.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- Needed for Source Link support -->
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SectionsNavigation.Abstractions\SectionsNavigation.Abstractions.csproj" />
+		<ProjectReference Include="..\StackNavigation.Reactive\StackNavigation.Reactive.csproj" />
+	</ItemGroup>
+
+</Project>

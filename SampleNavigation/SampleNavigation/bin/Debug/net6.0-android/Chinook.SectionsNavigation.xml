@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.SectionsNavigation</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.SectionsNavigation.BlindSectionsNavigator">
+            <summary>
+            This implementation of <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> doesn't deal with any view.
+            It's useful for unit testing.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.#ctor(System.String[])">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.BlindSectionsNavigator"/>.
+            </summary>
+            <param name="defaultSectionNames">The default section names.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.BlindSectionsNavigator.DefaultSetActiveSectionTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.BlindSectionsNavigator.DefaultOpenModalTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.BlindSectionsNavigator.DefaultCloseModalTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.GetLogger">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.CreateStackNavigator(System.String,System.Int32,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.InnerOpenModal(Chinook.SectionsNavigation.IModalStackNavigator,System.Boolean,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.InnerCloseModal(Chinook.SectionsNavigation.IModalStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.BlindSectionsNavigator.InnerSetActiveSection(Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorBase">
+            <summary>
+            This is a base class for <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> implementations.
+            This class does all the business logic to respect the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> contract. 
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorBase._processingStateMutex">
+            <summary>The mutex to use when setting the <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorBase.State"/> property to Processing.</summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorBase._logger">
+            <summary>
+            The internal <see cref="T:Microsoft.Extensions.Logging.ILogger"/> for this class and its derived types.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.#ctor(System.Collections.Generic.IReadOnlyDictionary{System.String,Chinook.SectionsNavigation.ISectionStackNavigator})">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorBase"/>.
+            </summary>
+            <param name="defaultSections">The sections reachable by <see cref="M:Chinook.SectionsNavigation.SectionsNavigatorBase.SetActiveSection(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)"/> mapped by their name.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.GetLogger">
+            <summary>
+            Gets the logger for this class.
+            This method is abstract because we want the actual (not abstract) implementation to show up in the logs instead of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorBase"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorBase.State">
+            <inheritdoc/>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.SectionsNavigatorBase.StateChanged">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorBase.DefaultSetActiveSectionTransitionInfo">
+            <summary>
+            Gets or sets the  default transition info for SetActiveSection operations.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorBase.DefaultOpenModalTransitionInfo">
+            <summary>
+            Gets or sets the  default transition info for OpenModal operations.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorBase.DefaultCloseModalTransitionInfo">
+            <summary>
+            Gets or sets the  default transition info for CloseModal operations.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.OpenModal(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.CreateStackNavigator(System.String,System.Int32,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            This method is reponsible to create a new instance implementing <see cref="T:Chinook.StackNavigation.IStackNavigator"/>, adding views to UI tree, etc.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.InnerOpenModal(Chinook.SectionsNavigation.IModalStackNavigator,System.Boolean,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Implementors must override this method to typically update the View layer.
+            </summary>
+            <param name="navigator">The modal navigator being opened.</param>
+            <param name="isTopModal">Whether the new modal is the top-most one. This is false when a modal opens with a lower priority than the active modal.</param>
+            <param name="transitionInfo">The transition info for this operation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.SetActiveSection(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.InnerSetActiveSection(Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Implementors must override this method to typically update the View layer. 
+            </summary>
+            <param name="previousSection">The section that was previously active.</param>
+            <param name="nextsection">The section will be the active one.</param>
+            <param name="transitionInfo">The transition info for this operation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.CloseModal(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorBase.InnerCloseModal(Chinook.SectionsNavigation.IModalStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            This method is responsible for changing any UI, play animations, release View references, etc.
+            </summary>
+            <param name="modalToClose">The modal section to close.</param>
+            <param name="transitionInfo">The transition info for this operation.</param>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter">
+            <summary>
+            This adapts an <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> into an <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            To strategy to transform a MultiStackNavigation into a SingleStackNavigation is to forward the member implementation to the active stack navigator.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.#ctor(Chinook.SectionsNavigation.ISectionsNavigator)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter"/> from the specified adaptee.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator to adapt into a <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.State">
+            <inheritdoc/>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.StateChanged">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.Clear(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.Navigate(System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.NavigateBack(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorToStackNavigatorAdapter.RemoveEntries(System.Threading.CancellationToken,System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionStackNavigator">
+            <summary>
+            This class decorates a <see cref="T:Chinook.StackNavigation.IStackNavigator"/> to implement both <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> and <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.#ctor(Chinook.StackNavigation.IStackNavigator,System.String,System.Boolean,System.Int32,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.SectionStackNavigator"/>.
+            </summary>
+            <param name="inner">The decorated stack navigator.</param>
+            <param name="name">The name of this section.</param>
+            <param name="isModal">Flag indicating whether this section is a modal.</param>
+            <param name="priority">The priority of the section.</param>
+            <param name="closeModalTransitionInfo">The default transition info for the close modal operation. This is only relevant for modals.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionStackNavigator.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionStackNavigator.IsModal">
+            <summary>
+            Gets whether this stack is a modal.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionStackNavigator.Priority">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionStackNavigator.State">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionStackNavigator.CloseModalTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.SectionStackNavigator.StateChanged">
+            <inheritdoc/>
+            <remarks>
+            We don't forward <see cref="E:Chinook.SectionsNavigation.SectionStackNavigator.StateChanged"/> to <see cref="F:Chinook.SectionsNavigation.SectionStackNavigator._inner"/> because we want to clear the subscription in <see cref="M:Chinook.SectionsNavigation.SectionStackNavigator.Dispose"/>.
+            </remarks>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.Clear(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.Navigate(System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.NavigateBack(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.RemoveEntries(System.Threading.CancellationToken,System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigator.ToString">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

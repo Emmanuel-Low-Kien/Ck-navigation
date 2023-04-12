@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.DynamicMvvm.Uno.WinUI</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher">
+            <summary>
+            This implementation of <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> batches its operations to reduce the call count of <see cref="M:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions.RunAsync(Microsoft.UI.Dispatching.DispatcherQueue,Microsoft.UI.Dispatching.DispatcherQueuePriority,Microsoft.UI.Dispatching.DispatcherQueueHandler)"/>.<br/>
+            When <see cref="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)"/> is invoked, the dispatcher operation is delayed by a small duration during which other <see cref="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)"/> invocations that may occur are accumulated.
+            After that short delay, all accumulated actions are executed within the same <see cref="M:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions.RunAsync(Microsoft.UI.Dispatching.DispatcherQueue,Microsoft.UI.Dispatching.DispatcherQueuePriority,Microsoft.UI.Dispatching.DispatcherQueueHandler)"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.#ctor(Microsoft.UI.Xaml.FrameworkElement,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher"/> class.
+            </summary>
+            <param name="frameworkElement">The <see cref="T:Microsoft.UI.Xaml.FrameworkElement"/> from which to retrieve the <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/>.</param>
+            <param name="throttleDurationMs">The amount of time during which the batching accumulation occurs.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.#ctor(Microsoft.UI.Dispatching.DispatcherQueue,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher"/> class.
+            </summary>
+            <param name="dispatcherQueue">The <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/>.</param>
+            <param name="throttleDurationMs">The amount of time during which the batching accumulation occurs.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.GetHasDispatcherAccess">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BatchingDispatcherQueueDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DispatcherFactory">
+            <summary>
+            This is the default implementation of <see cref="T:Chinook.DynamicMvvm.IDispatcherFactory"/>.
+            It uses the <see cref="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher"/> implementation by default.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherFactory.#ctor(Chinook.DynamicMvvm.CreateDispatcher)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.DynamicMvvm.DispatcherFactory"/>.
+            </summary>
+            <param name="createDispatcher">
+            The optional method to use to generate the <see cref="T:Chinook.DynamicMvvm.IDispatcher"/>.
+            When not provided, a method using the <see cref="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher"/> implementation is used.
+            </param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherFactory.Create(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.CreateDispatcher">
+            <summary>
+            This deletage is used to create an <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> from a native view object.
+            </summary>
+            <param name="view">The native view object.</param>
+            <returns>A <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> instance.</returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher">
+            <summary>
+            This implementation of <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> uses <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherQueueDispatcher.#ctor(Microsoft.UI.Xaml.FrameworkElement)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher"/> class.
+            </summary>
+            <param name="frameworkElement">The <see cref="T:Microsoft.UI.Xaml.FrameworkElement"/> from which to retrieve the <see cref="T:Windows.UI.Core.CoreDispatcher"/>.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherQueueDispatcher.#ctor(Microsoft.UI.Dispatching.DispatcherQueue)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher"/> class.
+            </summary>
+            <param name="dispatcherQueue">The <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/>.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherQueueDispatcher.GetHasDispatcherAccess">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DispatcherQueueDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions">
+            <summary>
+            This class exposes extensions methods on <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions.InvokeHandler(Microsoft.UI.Dispatching.DispatcherQueueHandler,System.Threading.Tasks.TaskCompletionSource{System.Object})">
+            <summary>
+            Invokes a given function on the target <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/> and returns a
+            <see cref="T:System.Threading.Tasks.Task"/> that completes when the invocation of the function is completed.
+            </summary>
+            <param name="taskCompletionSource">The <see cref="T:System.Threading.Tasks.TaskCompletionSource"/> that will set the result or Exception depending on the result of the invocation</param>
+            <param name="handler">The <see cref="T:Microsoft.UI.Dispatching.DispatcherQueueHandler"/> to invoke.</param>
+            <returns>A <see cref="T:Microsoft.UI.Dispatching.DispatcherQueueHandler"/> that completes when the invocation of <paramref name="handler"/> is over.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions.RunAsync(Microsoft.UI.Dispatching.DispatcherQueue,Microsoft.UI.Dispatching.DispatcherQueuePriority,Microsoft.UI.Dispatching.DispatcherQueueHandler)">
+            <summary>
+            Invokes a given function on the target <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/> and returns a
+            <see cref="T:System.Threading.Tasks.Task"/> that completes when the invocation of the function is completed.
+            </summary>
+            <param name="dispatcher">The target <see cref="T:Microsoft.UI.Dispatching.DispatcherQueue"/> to invoke the code on.</param>
+            <param name="handler">The <see cref="T:Microsoft.UI.Dispatching.DispatcherQueueHandler"/> to invoke.</param>
+            <param name="priority">The priority level for the function to invoke.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> that completes when the invocation of <paramref name="handler"/> is over.</returns>
+            <remarks>If the current thread has access to <paramref name="dispatcher"/>, <paramref name="handler"/> will be invoked directly.</remarks>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Extensions.DispatcherQueueExtensions.GetEnqueueException(System.String)">
+            <summary>
+            Creates an <see cref="T:System.InvalidOperationException"/> to return when an enqueue operation fails.
+            </summary>
+            <param name="message">The message of the exception.</param>
+            <returns>An <see cref="T:System.InvalidOperationException"/> with a specified message.</returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.UnoViewModelExtensions">
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> for Uno.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.UnoViewModelExtensions.AttachToView(Chinook.DynamicMvvm.IViewModel,Microsoft.UI.Xaml.FrameworkElement)">
+            <summary>
+            Attaches a <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to a <paramref name="frameworkElement"/> by setting the <see cref="P:Chinook.DynamicMvvm.IViewModel.Dispatcher"/> using the <see cref="T:Chinook.DynamicMvvm.DispatcherQueueDispatcher"/> implementation.
+            </summary>
+            <param name="viewModel"><see cref="T:Chinook.DynamicMvvm.IViewModel"/></param>
+            <param name="frameworkElement"><see cref="T:Microsoft.UI.Xaml.FrameworkElement"/></param>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.PreserveAttribute">
+            <summary>
+            This attribute is used to avoid the mono linker to remove members.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.GlobalStaticResources">
+            <summary>
+            Contains all the static resources defined for the application
+            </summary>
+        </member>
+    </members>
+</doc>

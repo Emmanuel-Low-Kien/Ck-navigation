@@ -1,0 +1,796 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.DynamicMvvm</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.DynamicMvvm.DynamicCommand">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.#ctor(System.String,Chinook.DynamicMvvm.IDynamicCommandStrategy)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicCommand"/> class.
+            </summary>
+            <param name="name">Command name</param>
+            <param name="strategy"><see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/></param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommand.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommand.IsExecuting">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DynamicCommand.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DynamicCommand.IsExecutingChanged">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DynamicCommand.PropertyChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.CanExecute(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.System#Windows#Input#ICommand#Execute(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.Execute(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommand.Finalize">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicCommandBuilder">
+            <summary>
+            The default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilder.#ctor(System.String,Chinook.DynamicMvvm.IDynamicCommandStrategy,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.DynamicMvvm.DynamicCommandBuilder"/>.
+            </summary>
+            <param name="name">The name of the command.</param>
+            <param name="baseStrategy">The base strategy to use for the command.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommandBuilder.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommandBuilder.ViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommandBuilder.BaseStrategy">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicCommandBuilder.Strategies">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilder.Build">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicCommandBuilderFactory">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.#ctor(System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicCommandBuilderFactory"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.CreateBuilder(System.String,Chinook.DynamicMvvm.IDynamicCommandStrategy,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Will create new instance of <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.
+            </summary>
+            <param name="name">Command name</param>
+            <param name="strategy"><see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/></param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created command.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.CreateFromAction(System.String,System.Action,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.CreateFromAction``1(System.String,System.Action{``0},Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.CreateFromTask(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderFactory.CreateFromTask``1(System.String,System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task},Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.ActionCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> will execute an action.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy.#ctor(System.Action{System.Object})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.ActionCommandStrategy"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy.#ctor(System.Action)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.ActionCommandStrategy"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.ActionCommandStrategy.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.ActionCommandStrategy`1">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> will execute an action with
+            a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ActionCommandStrategy`1.#ctor(System.Action{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.ActionCommandStrategy`1"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.OnBackgroundThread(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Will execute the command on a background thread.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.CancelPrevious(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Will cancel the previous command execution when executing the command.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.WithCanExecute(Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicProperty{System.Boolean})">
+            <summary>
+            Will attach the <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to the specified <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="canExecute"><see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> that affects the CanExecute</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.DisableWhileExecuting(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Will disable the command while it's executing.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.CatchErrors(Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandErrorHandler)">
+            <summary>
+            Will catch any exception thrown by the execution of the command and delegate it to the specified error handler.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="errorHandler">Error handler</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.CatchErrors(Chinook.DynamicMvvm.IDynamicCommandBuilder,System.Func{System.Threading.CancellationToken,Chinook.DynamicMvvm.IDynamicCommand,System.Exception,System.Threading.Tasks.Task})">
+            <summary>
+            Will catch any exception thrown by the execution of the command and delegate it to the specified error handler.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="errorHandler">Error handler</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.Locked(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Will lock the command execution.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.WithLogs(Chinook.DynamicMvvm.IDynamicCommandBuilder,Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Will add logs to the command execution.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="logger">Optional; the desired logger. If null is passed, a new one will be created using <see cref="P:Chinook.DynamicMvvm.DynamicMvvmConfiguration.LoggerFactory"/>.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandStrategyExtensions.SkipWhileExecuting(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Will skip executions if the command is already executing.
+            </summary>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.BackgroundCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will execute the command on a background thread.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BackgroundCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.BackgroundCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.BackgroundCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.CancelPreviousCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will cancel the previous command execution when executing the command.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CancelPreviousCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.CancelPreviousCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CancelPreviousCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CancelPreviousCommandStrategy.TryCancelExecution">
+            <summary>
+            Will cancel the current execution if any.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CancelPreviousCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.CanExecuteCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will attach
+            its <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> to the value of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CanExecuteCommandStrategy.#ctor(Chinook.DynamicMvvm.IDynamicProperty{System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.CanExecuteCommandStrategy"/> class.
+            </summary>
+            <param name="canExecute">Can execute property</param>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.CanExecuteCommandStrategy.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CanExecuteCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.CanExecuteCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will disable the command while it's executing.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DisableWhileExecutingCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.ErrorHandlerCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will catch any exception
+            that may be thrown during its execution and delegate the exception to an error handler.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ErrorHandlerCommandStrategy.#ctor(Chinook.DynamicMvvm.IDynamicCommandErrorHandler)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.ErrorHandlerCommandStrategy"/> class.
+            </summary>
+            <param name="errorHandler">Error handler</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ErrorHandlerCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandErrorHandler.HandleError(System.Threading.CancellationToken,Chinook.DynamicMvvm.IDynamicCommand,System.Exception)">
+            <summary>
+            Handles an error from a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+            <param name="ct"><see cref="T:System.Threading.CancellationToken"/></param>
+            <param name="command"><see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/></param>
+            <param name="exception"><see cref="T:System.Exception"/></param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandErrorHandler.#ctor(System.Func{System.Threading.CancellationToken,Chinook.DynamicMvvm.IDynamicCommand,System.Exception,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicCommandErrorHandler"/> class.
+            </summary>
+            <param name="handlerFunction">Error handler function</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandErrorHandler.HandleError(System.Threading.CancellationToken,Chinook.DynamicMvvm.IDynamicCommand,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.LockCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will lock the command execution.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.LockCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.LockCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.LockCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.LoggerCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will log the execution of the command.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.LoggerCommandStrategy.#ctor(Microsoft.Extensions.Logging.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.LoggerCommandStrategy"/> class.
+            </summary>
+            <param name="logger"><see cref="T:Microsoft.Extensions.Logging.ILogger"/></param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.LoggerCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> ensures that the <see cref="E:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy.CanExecuteChanged"/> event is raised using <see cref="M:Chinook.DynamicMvvm.IDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy.#ctor(Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> from which to access the <see cref="T:Chinook.DynamicMvvm.IDispatcher"/>.</param>
+            <exception cref="T:System.ArgumentNullException"><paramref name="viewModel"/> cannot be null.</exception>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy.InnerStrategy">
+            <inheritdoc/>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy.CanExecuteChanged">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.RaiseCanExecuteOnDispatcherCommandStrategy.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.SkipWhileExecutingCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> will skip executions if the command is already executing.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.SkipWhileExecutingCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.SkipWhileExecutingCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.SkipWhileExecutingCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.TaskCommandStrategy">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> will execute a task.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy.#ctor(System.Func{System.Threading.CancellationToken,System.Object,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.TaskCommandStrategy"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy.#ctor(System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.TaskCommandStrategy"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.TaskCommandStrategy.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.TaskCommandStrategy`1">
+            <summary>
+            This <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> will execute a task with
+            a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.TaskCommandStrategy`1.#ctor(System.Func{System.Threading.CancellationToken,`0,System.Threading.Tasks.Task})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.TaskCommandStrategy`1"/> class.
+            </summary>
+            <param name="execute">Action to execute</param>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1">
+            <summary>
+            This is an implementation of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> using an <see cref="T:System.IObservable`1"/> that
+            ensures <see cref="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged"/> is raised on a background thread and its observable source can be deactivated.
+            </summary>
+            <typeparam name="T">Type of value</typeparam>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1.#ctor(System.String,System.IObservable{`0},Chinook.DynamicMvvm.IViewModel,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1"/> class.
+            </summary>
+            <param name="name">The name of the this property.</param>
+            <param name="source">The observable source.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> used to determine dispatcher access.</param>
+            <param name="initialValue">The initial value of this property.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1.IsDeactivated">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1.Deactivate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableDynamicPropertyFromObservable`1.Reactivate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.Deactivation.IDeactivatableViewModel"/>.<br/>
+            When <see cref="P:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.IsDeactivated"/> is true, property changes are suppressed and buffered until <see cref="M:Chinook.DynamicMvvm.Deactivation.IDeactivatable.Reactivate"/> is called.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.#ctor(System.String,System.IServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase"/> class.
+            </summary>
+            <param name="name">The name of the ViewModel.</param>
+            <param name="serviceProvider">The service provider.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.IsDeactivated">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.RaisePropertyChanged(System.String)">
+            <inheritdoc />
+            <remarks>
+            When <see cref="P:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.IsDeactivated"/> is true, property changes are suppressed and buffered until <see cref="M:Chinook.DynamicMvvm.Deactivation.IDeactivatable.Reactivate"/> is called.
+            </remarks>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.Deactivate">
+            <summary>
+            Deactivates this ViewModel and all other <see cref="T:Chinook.DynamicMvvm.Deactivation.IDeactivatable"/> objects contained in <see cref="P:Chinook.DynamicMvvm.IViewModel.Disposables"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.DeactivatableViewModelBase.Reactivate">
+            <summary>
+            Reactivates this ViewModel and all other <see cref="T:Chinook.DynamicMvvm.Deactivation.IDeactivatable"/> objects contained in <see cref="P:Chinook.DynamicMvvm.IViewModel.Disposables"/>.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DeactivatableViewModelExtensions">
+            <summary>
+            This class exposes extensions methods on <see cref="T:Chinook.DynamicMvvm.Deactivation.IDeactivatableViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DeactivatableViewModelExtensions.GetFromDeactivatableObservable``1(Chinook.DynamicMvvm.Deactivation.IDeactivatableViewModel,System.IObservable{``0},``0,System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.<br/>
+            The underlying <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> implements <see cref="T:Chinook.DynamicMvvm.Deactivation.IDeactivatable"/> so the observation can be deactivated.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="source">The observable of values that feeds the property.</param>
+            <param name="initialValue">The property's initial value.</param>
+            <param name="name">The property's name.</param>
+            <returns>The property's value.</returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.PreserveAttribute">
+            <summary>
+            This attribute is used to avoid the mono linker to remove members.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicProperty">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty.#ctor(System.String,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicProperty"/> class.
+            </summary>
+            <param name="name">Name</param>
+            <param name="value">Initial value</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicProperty.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicProperty.Value">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DynamicProperty.ValueChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty.Finalize">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicProperty`1">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicProperty`1.#ctor(System.String,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicProperty`1"/> class.
+            </summary>
+            <param name="name">Name</param>
+            <param name="value">Initial value</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicProperty`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicPropertyFactory">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicPropertyFactory"/>.
+            </summary>
+            <remarks>
+            This implementation doesn't actually require the viewModel parameter.
+            </remarks>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFactory.Create``1(System.String,``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFactory.CreateFromTask``1(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFactory.CreateFromObservable``1(System.String,System.IObservable{``0},``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicPropertyFromObservable`1">
+            <summary>
+            This is an implementation of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> using an <see cref="T:System.IObservable`1"/>.
+            </summary>
+            <typeparam name="T">Type of value</typeparam>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFromObservable`1.#ctor(System.String,System.IObservable{`0},`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicPropertyFromObservable`1"/> class.
+            </summary>
+            <param name="name">Name</param>
+            <param name="source">Source</param>
+            <param name="initialValue">Initial value</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFromObservable`1.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicPropertyFromTask`1">
+            <summary>
+            This is an implementation of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> using a <see cref="T:System.Threading.Tasks.Task`1"/>.
+            </summary>
+            <typeparam name="T">Type of value</typeparam>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFromTask`1.#ctor(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{`0}},`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DynamicPropertyFromTask`1"/> class.
+            </summary>
+            <param name="name">Name</param>
+            <param name="source">Source</param>
+            <param name="initialValue">Initial value</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicPropertyFromTask`1.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty">
+            <summary>
+            This implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> ensures that <see cref="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged"/> is raised on a background thread.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.#ctor(System.String,Chinook.DynamicMvvm.IViewModel,System.Object)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty"/> class.
+            </summary>
+            <param name="name">The name of the this property.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> used to determine dispatcher access.</param>
+            <param name="value">The initial value of this property.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.Value">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.ValueChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.ToString">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty`1">
+            <summary>
+            This implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> ensures that <see cref="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged"/> is raised on a background thread.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty`1.#ctor(System.String,Chinook.DynamicMvvm.IViewModel,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty`1"/> class.
+            </summary>
+            <param name="name">The name of the this property.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> used to determine dispatcher access.</param>
+            <param name="value">The initial value of this property.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty`1.Value">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFactory">
+            <summary>
+            This implementation of <see cref="T:Chinook.DynamicMvvm.IDynamicPropertyFactory"/> uses the <see cref="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicProperty"/> base class for all methods.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFactory.Create``1(System.String,``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFactory.CreateFromObservable``1(System.String,System.IObservable{``0},``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFactory.CreateFromTask``1(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},``0,Chinook.DynamicMvvm.IViewModel)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromObservable`1">
+            <summary>
+            This is an implementation of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> using an <see cref="T:System.IObservable`1"/> that ensures <see cref="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged"/> is raised on a background thread.
+            </summary>
+            <typeparam name="T">Type of value</typeparam>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromObservable`1.#ctor(System.String,System.IObservable{`0},Chinook.DynamicMvvm.IViewModel,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromObservable`1"/> class.
+            </summary>
+            <param name="name">The name of the this property.</param>
+            <param name="source">Source</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> used to determine dispatcher access.</param>
+            <param name="initialValue">The initial value of this property.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromObservable`1.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromTask`1">
+            <summary>
+            This is an implementation of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> using a <see cref="T:System.Threading.Tasks.Task`1"/> that ensures <see cref="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged"/> is raised on a background thread.
+            </summary>
+            <typeparam name="T">Type of value</typeparam>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromTask`1.#ctor(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{`0}},Chinook.DynamicMvvm.IViewModel,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromTask`1"/> class.
+            </summary>
+            <param name="name">The name of the this property.</param>
+            <param name="source">The task source for this property.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> used to determine dispatcher access.</param>
+            <param name="initialValue">The initial value of this property.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Implementations.ValueChangedOnBackgroundTaskDynamicPropertyFromTask`1.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.ViewModelBase">
+            <summary>
+            This is a default implementation of <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.#ctor(System.String,System.IServiceProvider)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.ViewModelBase"/> class.
+            </summary>
+            <param name="name">The name of the ViewModel.</param>
+            <param name="serviceProvider">The service provider.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.ServiceProvider">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.DefaultServiceProvider">
+            <summary>
+            Gets or sets the default <see cref="T:System.IServiceProvider"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.Dispatcher">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.ViewModelBase.DispatcherChanged">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.IsDisposed">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.CancellationToken">
+            <summary>
+            Gets a <see cref="T:System.Threading.CancellationToken"/> bound to the lifetime of this <see cref="T:Chinook.DynamicMvvm.ViewModelBase"/>.
+            It cancels when this <see cref="T:Chinook.DynamicMvvm.ViewModelBase"/> is disposes.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.Disposables">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.AddDisposable(System.IDisposable)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.AddDisposable(System.String,System.IDisposable)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.RemoveDisposable(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.TryGetDisposable(System.String,System.IDisposable@)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.Finalize">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.ViewModelBase.ErrorsChanged">
+            <inheritdoc />
+        </member>
+        <member name="P:Chinook.DynamicMvvm.ViewModelBase.HasErrors">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.GetErrors(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.SetErrors(System.String,System.Collections.Generic.IEnumerable{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.SetErrors(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.Object}})">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.ClearErrors(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.ViewModelBase.PropertyChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.ViewModelBase.RaisePropertyChanged(System.String)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

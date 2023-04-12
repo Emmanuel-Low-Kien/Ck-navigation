@@ -1,0 +1,360 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.SectionsNavigation.Uno.WinUI</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.SectionsNavigation.Animations">
+            <summary>
+            This class regroups helper methods to build animations.
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.Animations.DefaultDuration">
+            <summary>
+            The default duration of built-in animations, in seconds.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.Animations.FadeOutFrame1ToRevealFrame2(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Fades out <paramref name="frame1"/> to reveal <paramref name="frame2"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.Animations.FadeInFrame2ToHideFrame1(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Fades in <paramref name="frame1"/> to hide <paramref name="frame2"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.Animations.SlideFrame2UpwardsToHideFrame1(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Slides <paramref name="frame2"/> upwards to hide <paramref name="frame1"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.Animations.SlideFrame1DownToRevealFrame2(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Slides down <paramref name="frame1"/> to releave <paramref name="frame2"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.Animations.CollapseFrame1AndShowFrame2(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Collapses <paramref name="frame1"/> and make <paramref name="frame2"/> visible.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo">
+            <summary>
+            This <see cref="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfo"/> implementation is used to create a custom transition between frames.
+            This class allows you to build your own animation as an async Task using <see cref="T:Chinook.SectionsNavigation.FrameSectionsTransitionDelegate"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo.#ctor(Chinook.SectionsNavigation.FrameSectionsTransitionDelegate)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo"/>.
+            </summary>
+            <param name="frameTranstion">The method describing the transition.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo.Type">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo.Run(Microsoft.UI.Xaml.Controls.Frame,Microsoft.UI.Xaml.Controls.Frame,System.Boolean)">
+            <summary>
+            Runs the transition.
+            </summary>
+            <param name="frameToHide">The <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> that must be hidden after the transition.</param>
+            <param name="frameToShow">The <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> that must be visible after the transition.</param>
+            <param name="frameToShowIsAboveFrameToHide">Flag indicating whether the frame to show is above the frame to hide in their parent container.</param>
+            <returns>Task running the transition operation.</returns>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.FrameSectionsTransitionDelegate">
+            <summary>
+            Delegate describing a <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> transition animation.
+            We recommend that the animation doesn't go over 300ms.
+            </summary>
+            <param name="frameToHide">The <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> that must be hidden after the transition.</param>
+            <param name="frameToShow">The <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> that must be visible after the transition.</param>
+            <param name="frameToShowIsAboveFrameToHide">Flag indicating whether the frame to show is above the frame to hide in their parent container.</param>
+            <returns>Task running the transition operation.</returns>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.FrameSectionsNavigator">
+            <summary>
+            The <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> implementation for <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/>-based views.
+            This implementation requires a <see cref="T:Chinook.SectionsNavigation.MultiFrame"/> to handle the views.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.#ctor(Chinook.SectionsNavigation.MultiFrame,System.Collections.Generic.IReadOnlyDictionary{System.Type,System.Type})">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.FrameSectionsNavigator"/>.
+            </summary>
+            <param name="multiFrame">The <see cref="T:Chinook.SectionsNavigation.MultiFrame"/> hosting the views.</param>
+            <param name="globalRegistrations">The dictionary of view model types mapping to their page type.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsNavigator.DefaultSetActiveSectionTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsNavigator.DefaultOpenModalTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsNavigator.DefaultCloseModalTransitionInfo">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.GetLogger">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.CreateStackNavigator(System.String,System.Int32,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.InnerOpenModal(Chinook.SectionsNavigation.IModalStackNavigator,System.Boolean,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.InnerSetActiveSection(Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.ISectionStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.FrameSectionsNavigator.InnerCloseModal(Chinook.SectionsNavigation.IModalStackNavigator,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfo">
+            <summary>
+            Represents the transition information for a <see cref="T:Chinook.SectionsNavigation.FrameSectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.Type">
+            <summary>
+            The type of <see cref="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfo"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.SuppressTransition">
+            <summary>
+            Gets the transition info for a suppressed transition. There is not visual animation when using this transition info.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.FadeInOrFadeOut">
+            <summary>
+            The new frame fades in or the previous frame fades out, depending on the layering.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.SlideUp">
+            <summary>
+            The new frame slides up, hiding the previous frame.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.SlideDown">
+            <summary>
+            The previous frame slides down, revealing the new frame.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.FrameSectionsTransitionInfo.NativeiOSModal">
+            <summary>
+            The frames are animated using a UIViewController with the default configuration.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfoTypes">
+            <summary>
+            Represents the supported types of <see cref="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfo"/>.
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.FrameSectionsTransitionInfoTypes.FrameBased">
+            <summary>
+            The transition is applied by changing properties or animating properties of <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> objects.
+            This is associated with the <see cref="T:Chinook.SectionsNavigation.DelegatingFrameSectionsTransitionInfo"/> class.
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.FrameSectionsTransitionInfoTypes.UIViewControllerBased">
+            <summary>
+            The transition is applied by using the native iOS transitions offered by UIKit.
+            This is associated with the <see cref="T:Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo"/> class.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.ModalViewController">
+            <summary>
+            Represents a UIViewController that wraps a <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/> in the context of modal sections.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalViewController.#ctor(System.String,Microsoft.UI.Xaml.Controls.Frame)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.ModalViewController"/>.
+            </summary>
+            <param name="modalName">The modal name.</param>
+            <param name="frame">The frame to wrap.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ModalViewController.ModalName">
+            <summary>
+            The modal name associated with this UIViewController.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ModalViewController.OpeningTransitionInfo">
+            <summary>
+            The <see cref="T:Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo"/> used when opening this modal.
+            This is reused for the closing transition info when closing natively.
+            </summary>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.ModalViewController.ClosedNatively">
+            <summary>
+            This event is raised when the UIViewController was closed natively, meaning that the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> was not responsible for the close operation.
+            This can happen when the user uses a native gesture.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalViewController.Open(Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo)">
+            <summary>
+            Opens this UIViewController.
+            </summary>
+            <param name="transitionInfo">The transition info affecting the native animation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalViewController.Close(Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo)">
+            <summary>
+            Closes this UIViewController.
+            </summary>
+            <param name="transitionInfo">The transition info affecting the native animation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalViewController.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.MultiFrame">
+            <summary>
+            This <see cref="T:Microsoft.UI.Xaml.FrameworkElement"/> manages multiple <see cref="T:Microsoft.UI.Xaml.Controls.Frame"/>s in the context of sections navigation.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.MultiFrame"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.CommaSeparatedSectionsFrameNames">
+            <summary>
+            Gets or sets the sections names as a comma-separated list of strings.
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.MultiFrame.CommaSeparatedSectionsFrameNamesProperty">
+            <summary>
+            <see cref="P:Chinook.SectionsNavigation.MultiFrame.CommaSeparatedSectionsFrameNames"/>
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.SectionsFrameNames">
+            <summary>
+            The names of the sections.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.GetSectionFrame(System.String)">
+            <summary>
+            Gets an existing Frame with the specified name.
+            </summary>
+            <param name="name">The name of the frame to retrieve.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.GetOrCreateFrame(System.String,System.Int32,Chinook.SectionsNavigation.FrameSectionsTransitionInfoTypes)">
+            <summary>
+            Gets or creates a Frame with the specified name and priority.
+            </summary>
+            <param name="name">The name of the Frame to retrieve or create.</param>
+            <param name="priority">The priority determines the Z order of the view. It's only used when creating a new Frame.</param>
+            <param name="transitionInfoType">The transition info type to determine how to create the Frame.</param>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.MultiFrame.ModalClosedNatively">
+            <summary>
+            This event is raised when a modal was closed natively. This can only happen when using a native modal (with <see cref="T:Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo"/>).
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.RemoveFrame(System.String)">
+            <summary>
+            Removes a Frame with the specified name.
+            </summary>
+            <param name="name">The name of the Frame to remove.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.ShowInstantly(System.String)">
+            <summary>
+            Shows a frame instantly (there would never be any animation for this).
+            </summary>
+            <param name="frameName">The name of the frame to show.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.ChangeActiveSection(System.String,System.String,Chinook.SectionsNavigation.FrameSectionsTransitionInfo)">
+            <summary>
+            Changes the active section.
+            </summary>
+            <param name="previousFrameName">The name of the frame that will no longer be active.</param>
+            <param name="nextFrameName">The name of the frame that will be active.</param>
+            <param name="transitionInfo">The transition info describing the animation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.OpenModal(System.String,System.String,Chinook.SectionsNavigation.FrameSectionsTransitionInfo)">
+            <summary>
+            Shows a modal frame.
+            </summary>
+            <param name="previousFrameName">The name of the frame that will be hidden by the modal.</param>
+            <param name="nextFrameName">The name of the modal frame.</param>
+            <param name="transitionInfo">The transition info describing the animation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.CloseModal(System.String,System.String,Chinook.SectionsNavigation.FrameSectionsTransitionInfo)">
+            <summary>
+            Hides a modal frame.
+            </summary>
+            <param name="previousFrameName">The name of the modal frame to close.</param>
+            <param name="nextFrameName">The name of the frame that will be revealed as a result of closing the modal.</param>
+            <param name="transitionInfo">The transition info describing the animation.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.MultiFrame.HidePreviousFrameAndShowNextFrame(System.String,System.String,System.Func{Chinook.SectionsNavigation.MultiFrame.FrameInfo,Chinook.SectionsNavigation.MultiFrame.FrameInfo,System.Threading.Tasks.Task})">
+            <summary>
+            Helper method to abstract the wait for the control, try-catch, threading, and changing the state of the FrameInfo instances.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.MultiFrame.FrameInfo">
+            <summary>
+            This class is used to associate properties with a <see cref="P:Chinook.SectionsNavigation.MultiFrame.FrameInfo.Frame"/> instance.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.FrameInfo.Frame">
+            <summary>
+            The frame associated with the other properties.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.FrameInfo.State">
+            <summary>
+            The state of the frame visually.
+            This is used to cleanup frames when changing states.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.FrameInfo.Index">
+            <summary>
+            The index of the frame in the its parent <see cref="P:Microsoft.UI.Xaml.Controls.Panel.Children"/> collection.
+            This is used to chose which animation to use when changing sections.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.MultiFrame.FrameInfo.Priority">
+            <summary>
+            The priority used to order frames in their parent <see cref="P:Microsoft.UI.Xaml.Controls.Panel.Children"/> collection.
+            This ensures that modal are on top of sections and that modals are ordered even when opened with custom priorities.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.ModalClosedEventArgs">
+            <summary>
+            The <see cref="T:System.EventArgs"/> for the <see cref="E:Chinook.SectionsNavigation.MultiFrame.ModalClosedNatively"/> event.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalClosedEventArgs.#ctor(System.String,Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.ModalClosedEventArgs"/>.
+            </summary>
+            <param name="modalName">The closed modal's name.</param>
+            <param name="transitionInfo">The transition info used.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ModalClosedEventArgs.ModalName">
+            <summary>
+            Gets the closed modal's name.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ModalClosedEventArgs.TransitionInfo">
+            <summary>
+            Gets the transition info used.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo">
+            <summary>
+            This implementation of <see cref="T:Chinook.SectionsNavigation.FrameSectionsTransitionInfo"/> is used to animate frames using native iOS animations.
+            This class allows you to leverage the various built-in options from UIKit.
+            This class is only supported on iOS.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.UIViewControllerSectionsTransitionInfo.Type">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.GlobalStaticResources">
+            <summary>
+            Contains all the static resources defined for the application
+            </summary>
+        </member>
+    </members>
+</doc>

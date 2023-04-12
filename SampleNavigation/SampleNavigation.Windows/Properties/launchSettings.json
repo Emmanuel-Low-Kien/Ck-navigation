@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "SampleNavigation.Windows": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

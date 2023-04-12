@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <_BundleResourceWithLogicalName Include="obj\Debug\net6.0-ios\iossimulator-x64\ibtool\LaunchScreen.storyboardc\UIViewController-5.nib">
+      <Optimize>false</Optimize>
+      <InterfaceDefinition>iOS/LaunchScreen.storyboard</InterfaceDefinition>
+      <LogicalName>LaunchScreen.storyboardc/UIViewController-5.nib</LogicalName>
+      <OriginalItemSpec>obj/Debug/net6.0-ios/iossimulator-x64/ibtool/LaunchScreen.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj\Debug\net6.0-ios\iossimulator-x64\ibtool\LaunchScreen.storyboardc\5-view-55.nib">
+      <Optimize>false</Optimize>
+      <InterfaceDefinition>iOS/LaunchScreen.storyboard</InterfaceDefinition>
+      <LogicalName>LaunchScreen.storyboardc/5-view-55.nib</LogicalName>
+      <OriginalItemSpec>obj/Debug/net6.0-ios/iossimulator-x64/ibtool/LaunchScreen.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+    <_BundleResourceWithLogicalName Include="obj\Debug\net6.0-ios\iossimulator-x64\ibtool\LaunchScreen.storyboardc\Info.plist">
+      <Optimize>false</Optimize>
+      <InterfaceDefinition>iOS/LaunchScreen.storyboard</InterfaceDefinition>
+      <LogicalName>LaunchScreen.storyboardc/Info.plist</LogicalName>
+      <OriginalItemSpec>obj/Debug/net6.0-ios/iossimulator-x64/ibtool/LaunchScreen.storyboardc</OriginalItemSpec>
+    </_BundleResourceWithLogicalName>
+  </ItemGroup>
+</Project>

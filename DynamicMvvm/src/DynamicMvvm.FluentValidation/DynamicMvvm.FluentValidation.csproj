@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0</TargetFrameworks>
+		<RootNamespace>Chinook.DynamicMvvm</RootNamespace>
+		<Authors>nventive</Authors>
+		<Company>nventive</Company>
+		<AssemblyName>Chinook.DynamicMvvm.FluentValidation</AssemblyName>
+		<PackageId>Chinook.DynamicMvvm.FluentValidation</PackageId>
+		<Description>Chinook.DynamicMvvm is a collection of extensible MVVM libraries for declarative ViewModels.</Description>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageTags>mvvm;xamarin;ios;android;uwp;chinook;maui;winui;</PackageTags>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/nventive/Chinook.DynamicMvvm</PackageProjectUrl>
+
+		<!--Needed for Source Link support -->
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+    	<PackageReference Include="FluentValidation" Version="9.5.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!--Needed for Source Link support -->
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\DynamicMvvm.Abstractions\DynamicMvvm.Abstractions.csproj" />
+	</ItemGroup>
+</Project>

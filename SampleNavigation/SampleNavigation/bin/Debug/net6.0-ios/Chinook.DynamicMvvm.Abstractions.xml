@@ -1,0 +1,787 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.DynamicMvvm.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.DynamicMvvm.DelegatingCommandStrategy">
+            <summary>
+            This delegates the functionalities of <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> to an inner strategy.
+            You may override any member add customization.
+            This class is an homologue to <see cref="T:System.Net.Http.DelegatingHandler"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DelegatingCommandStrategy.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.DynamicMvvm.DelegatingCommandStrategy"/> class.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DelegatingCommandStrategy.InnerStrategy">
+            <inheritdoc />
+        </member>
+        <member name="E:Chinook.DynamicMvvm.DelegatingCommandStrategy.CanExecuteChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DelegatingCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DelegatingCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DelegatingCommandStrategy.Dispose">
+            <inheritdoc />
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicCommand">
+            <summary>
+            A <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> is a <see cref="T:System.Windows.Input.ICommand"/> that will notify its subscribers when it is executing.
+            It adds support of async execution using the <see cref="M:Chinook.DynamicMvvm.IDynamicCommand.Execute(System.Object)"/> method.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommand.Name">
+            <summary>
+            Gets the name of the command.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommand.IsExecuting">
+            <summary>
+            Gets whether or not the command is currently executing.
+            </summary>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.IDynamicCommand.IsExecutingChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command is executing.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommand.Execute(System.Object)">
+            <summary>
+            Task based version of the <see cref="M:System.Windows.Input.ICommand.Execute(System.Object)"/> method.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicCommandExtensions">
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandExtensions.Execute(Chinook.DynamicMvvm.IDynamicCommand)">
+            <summary>
+            Executes the specified <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> without a parameter.
+            </summary>
+            <param name="command"><see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/></param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicCommandBuilder">
+            <summary>
+            This is a builder that builds a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.Name">
+            <summary>
+            Gets name of the command.
+            This cannot be changed.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.ViewModel">
+            <summary>
+            The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the resulting <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+            <remarks>
+            This can be null.
+            </remarks>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.BaseStrategy">
+            <summary>
+            Gets the base stragegy that actually invokes the user execution.
+            This cannot be changed.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.Strategies">
+            <summary>
+            The list of strategies that will decorate the <see cref="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.BaseStrategy"/>.
+            The order is important: the first strategy wraps the second, which wraps the third and so on.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandBuilder.Build">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicCommandBuilderExtensions">
+            <summary>
+            Offers extension methods on <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderExtensions.WithStrategy(Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.DelegatingCommandStrategy,System.Boolean)">
+            <summary>
+            Adds a <paramref name="strategy"/> to the builder.
+            </summary>
+            <param name="builder">The builder.</param>
+            <param name="strategy">The strategy to add.</param>
+            <param name="wrapExisting">When true, the <paramref name="strategy"/> is added at the start of the list, so that it wraps all existing strategies already present in the list.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderExtensions.WithoutStrategy``1(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Removes strategies matching <typeparamref name="TStrategy"/> from the builder.
+            </summary>
+            <typeparam name="TStrategy">Any type implementing <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/>.</typeparam>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.DynamicCommandBuilderExtensions.ClearStrategies(Chinook.DynamicMvvm.IDynamicCommandBuilder)">
+            <summary>
+            Removes all strategies from the builder.
+            </summary>
+            <remarks>
+            This can be usefull if you want to completely discard the default configuration.
+            Note that the <see cref="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.BaseStrategy"/> is not modified, only <see cref="P:Chinook.DynamicMvvm.IDynamicCommandBuilder.Strategies"/> is cleared.
+            </remarks>
+            <param name="builder">The builder.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/></returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory">
+            <summary>
+            This interface is used to create <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory.CreateFromAction(System.String,System.Action,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/> with the specified <paramref name="name"/>
+            that will execute the specified <paramref name="execute"/> action.
+            </summary>
+            <param name="name">The command name.</param>
+            <param name="execute">The action to execute.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</param>
+            <returns>The created <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory.CreateFromAction``1(System.String,System.Action{``0},Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/> with the specified <paramref name="name"/>
+            that will execute the specified <paramref name="execute"/> action with
+            a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+            <param name="name">The command name.</param>
+            <param name="execute">The action to execute.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</param>
+            <returns>The created <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory.CreateFromTask(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/> with the specified <paramref name="name"/>
+            that will execute the specified <paramref name="execute"/> task.
+            </summary>
+            <param name="name">The command name.</param>
+            <param name="execute">The task to execute.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</param>
+            <returns>The created <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory.CreateFromTask``1(System.String,System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task},Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/> with the specified <paramref name="name"/>
+            that will execute the specified <paramref name="execute"/> task with
+            a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+            <param name="name">The command name.</param>
+            <param name="execute">The task to execute.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</param>
+            <returns>The created <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilder"/>.</returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicCommandStrategy">
+            <summary>
+            A <see cref="T:Chinook.DynamicMvvm.IDynamicCommandStrategy"/> is an execution delegate for a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            It can be used to delegate the execution of the <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> to different implementations (e.g. action, task, etc.)
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandStrategy.CanExecute(System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <summary>
+            Determines if the strategy can be executed. 
+            </summary>
+            <param name="parameter">The command parameter.</param>
+            <param name="command">The calling command.</param>
+            <returns>True if the command can be executed; false otherwise.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicCommandStrategy.Execute(System.Threading.CancellationToken,System.Object,Chinook.DynamicMvvm.IDynamicCommand)">
+            <summary>
+            Executes the strategy.
+            </summary>
+            <param name="ct">The <see cref="T:System.Threading.CancellationToken"/>.</param>
+            <param name="parameter">The command parameter.</param>
+            <param name="command">The calling command.</param>
+            <returns><see cref="T:System.Threading.Tasks.Task"/></returns>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.IDynamicCommandStrategy.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether or not the command should execute.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Deactivation.IDeactivatable">
+            <summary>
+            Represents something that can be deactivated and reactivated.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.Deactivation.IDeactivatable.IsDeactivated">
+            <summary>
+            Gets whether this object is deactivated.
+            This is false by default.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.IDeactivatable.Deactivate">
+            <summary>
+            Deactivates this object.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.Deactivation.IDeactivatable.Reactivate">
+            <summary>
+            Reactivates this object.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.Deactivation.IDeactivatableViewModel">
+            <summary>
+            Represents a ViewModel that implements deactivation.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicMvvmConfiguration">
+            <summary>
+            This class exposes the configuration for the <see cref="N:Chinook.DynamicMvvm"/> namespace.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.DynamicMvvmConfiguration.LoggerFactory">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> used by all classes under the <see cref="N:Chinook.DynamicMvvm"/> namespace.
+            The default value is a <see cref="T:Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory"/> instance.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicProperty">
+            <summary>
+            A <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> represents a property that will notify its subscribers when its value changes.
+            It always has a value that can be accessed synchronously.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicProperty.Name">
+            <summary>
+            The name of the property.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicProperty.Value">
+            <summary>
+            The value of the property.
+            </summary>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.IDynamicProperty.ValueChanged">
+            <summary>
+            Occurs when the value changes.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicProperty`1">
+            <summary>
+            A typed version of <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+            <typeparam name="T">The type of value.</typeparam>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IDynamicProperty`1.Value">
+            <summary>
+            The value of the property.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.DynamicPropertyChangedEventHandler">
+            <summary>
+            Occurs when the value of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> changes.
+            </summary>
+            <param name="property"><see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/></param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicPropertyExtensions.Subscribe(Chinook.DynamicMvvm.IDynamicProperty,System.Action{Chinook.DynamicMvvm.IDynamicProperty})">
+            <summary>
+            Subscribes to the changes in the value of the <paramref name="property"/> and invokes the
+            <paramref name="onValueChanged"/> callback.
+            </summary>
+            <param name="property">The property to subscribe to.</param>
+            <param name="onValueChanged">The callback.</param>
+            <returns><see cref="T:System.IDisposable"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicPropertyExtensions.Subscribe``1(Chinook.DynamicMvvm.IDynamicProperty{``0},System.Action{Chinook.DynamicMvvm.IDynamicProperty{``0}})">
+            <summary>
+            Subscribes to the changes in the value of the <paramref name="property"/> and invokes the
+            <paramref name="onValueChanged"/> callback.
+            </summary>
+            <typeparam name="T">The type of the property.</typeparam>
+            <param name="property">The property to subscribe to.</param>
+            <param name="onValueChanged">The callback.</param>
+            <returns><see cref="T:System.IDisposable"/></returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDynamicPropertyFactory">
+            <summary>
+            This interface is used to create <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicPropertyFactory.Create``1(System.String,``0,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> with the specified <paramref name="name"/> and <paramref name="initialValue"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="name">The property name.</param>
+            <param name="initialValue">The initial value.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicPropertyFactory.CreateFromTask``1(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},``0,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> with the specified <paramref name="name"/> and <paramref name="initialValue"/>.
+            This property will be updated once the <paramref name="source"/> task is complete.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="name">The property name.</param>
+            <param name="source">The property source.</param>
+            <param name="initialValue">The initial value.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/></returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDynamicPropertyFactory.CreateFromObservable``1(System.String,System.IObservable{``0},``0,Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> with the specified <paramref name="name"/> and <paramref name="initialValue"/>.
+            This property will be updated when the <paramref name="source"/> observable pushes new values.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="name">The property name.</param>
+            <param name="source">The property source.</param>
+            <param name="initialValue">The initial value.</param>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> that will own the newly created <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.</param>
+            <returns><see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/></returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDispatcher">
+            <summary>
+            An <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> allows to execute code on a specific thread.
+            This is useful when the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event needs to be raised on a specific thread.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDispatcher.GetHasDispatcherAccess">
+            <summary>
+            Gets whether or not the thread has dispatcher access.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDispatcher.ExecuteOnDispatcher(System.Threading.CancellationToken,System.Action)">
+            <summary>
+            Executes the specified action on a dispatcher thread.
+            </summary>
+            <param name="ct">The cancellation token.</param>
+            <param name="action">The action to execute.</param>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IDispatcherFactory">
+            <summary>
+            This factory is used to abstract the creation of <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> objects.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IDispatcherFactory.Create(System.Object)">
+            <summary>
+            Creates a new <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> using the provided <paramref name="view"/> reference.
+            </summary>
+            <param name="view">The native view object.</param>
+            <returns>A new <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> instance.</returns>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IViewModel">
+            <summary>
+            A <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is a container that you can use for data bindings.
+            Other objects can be attached to the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> by registering <see cref="T:System.IDisposable"/> objects.
+            The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> has a life cycle. Disposing it will dispose all its attached objects.
+            It implements <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> to support property data binding.
+            It implements <see cref="T:System.ComponentModel.INotifyDataErrorInfo"/> to support error data binding.
+            A <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is coupled to a <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> to raise its events on the right threads.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IViewModel.Name">
+            <summary>
+            Gets the name of the <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.RaisePropertyChanged(System.String)">
+            <summary>
+            Invokes <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> on the correct thread.
+            </summary>
+            <param name="propertyName">The name of the property.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.AddDisposable(System.String,System.IDisposable)">
+            <summary>
+            Adds a disposable to this ViewModel.
+            </summary>
+            <remarks>
+            The <paramref name="disposable"/> disposes when <see cref="M:System.IDisposable.Dispose"/> is called.
+            You can retrieve <paramref name="disposable"/> using <see cref="P:Chinook.DynamicMvvm.IViewModel.Disposables"/> and <see cref="M:Chinook.DynamicMvvm.IViewModel.TryGetDisposable(System.String,System.IDisposable@)"/>.
+            </remarks>
+            <param name="key">The key associated with the disposable.</param>
+            <param name="disposable">The disposable to dispose with this ViewModel.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.RemoveDisposable(System.String)">
+            <summary>
+            Removes a previously added (with <see cref="M:Chinook.DynamicMvvm.IViewModel.AddDisposable(System.String,System.IDisposable)"/>) disposable from this ViewModel.
+            </summary>
+            <param name="key">The key used to add the disposable to this ViewModel.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.TryGetDisposable(System.String,System.IDisposable@)">
+            <summary>
+            Gets a disposable using its associated key.
+            </summary>
+            <param name="key">The key associated to a disposable.</param>
+            <param name="disposable">When found, the disposable associated with the key. Null otherwise.</param>
+            <returns>Returns true if the key was found. False otherwise.</returns>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IViewModel.Disposables">
+            <summary>
+            Gets an enumerable of key-value pair containing each pair created via <see cref="M:Chinook.DynamicMvvm.IViewModel.AddDisposable(System.String,System.IDisposable)"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IViewModel.Dispatcher">
+            <summary>
+            Gets or sets the dispatcher attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+        </member>
+        <member name="E:Chinook.DynamicMvvm.IViewModel.DispatcherChanged">
+            <summary>
+            Notifies when the <see cref="P:Chinook.DynamicMvvm.IViewModel.Dispatcher"/> property changes.
+            </summary>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IViewModel.ServiceProvider">
+            <summary>
+            Gets the services available for this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.SetErrors(System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.Object}})">
+            <summary>
+            Sets the errors for the <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <param name="errors">
+            The errors.
+            The dictionary maps property names to their associated errors.
+            </param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.SetErrors(System.String,System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Sets the errors for a given property of the <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <param name="propertyName">The property name.</param>
+            <param name="errors">The errors associated with the property.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModel.ClearErrors(System.String)">
+            <summary>
+            Clears the errors for the property specified with <paramref name="propertyName"/>.
+            If no <paramref name="propertyName"/> is provided, clears all errors.
+            </summary>
+            <param name="propertyName">The property name.</param>
+        </member>
+        <member name="P:Chinook.DynamicMvvm.IViewModel.IsDisposed">
+            <summary>
+            Gets whether this <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.
+            </summary>
+        </member>
+        <member name="T:Chinook.DynamicMvvm.IViewModelExtensions">
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to attach children.
+            </summary>
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to create <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.
+            </summary>
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to get disposables.
+            </summary>
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to create <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+            <summary>
+            Extensions on <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to resolve services.
+            </summary>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetChildren(Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Gets the children of this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <returns>A IEnumerable of child <see cref="T:Chinook.DynamicMvvm.IViewModel"/>s of this ViewModel.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetChild``1(Chinook.DynamicMvvm.IViewModel,System.Func{``0},System.String)">
+            <summary>
+            Gets the child of this <see cref="T:Chinook.DynamicMvvm.IViewModel"/> for the specified <paramref name="name"/>.
+            If the child doesn't exist, it is created and attached using <paramref name="childViewModelProvider"/>.
+            </summary>
+            <typeparam name="TChildViewModel">The type of child ViewModel.</typeparam>
+            <param name="viewModel">The parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="childViewModelProvider">The factory to the child <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="name">The child ViewModel's name.</param>
+            <returns>The attached child <see cref="T:Chinook.DynamicMvvm.IViewModel"/>. Default of <typeparamref name="TChildViewModel"/> is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetChild``1(Chinook.DynamicMvvm.IViewModel,System.String)">
+            <summary>
+            Gets the child of this <see cref="T:Chinook.DynamicMvvm.IViewModel"/> for the specified <paramref name="name"/>.
+            If the child doesn't exist, it is created and attached using the default constructor.
+            </summary>
+            <typeparam name="TChildViewModel">The type of child viewmodel.</typeparam>
+            <param name="viewModel">The parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="name">The child ViewModel's name.</param>
+            <returns>The attached child <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.AttachChild``1(Chinook.DynamicMvvm.IViewModel,``0,System.String)">
+            <summary>
+            Attaches a child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to a parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            By being attached, the child will be disposed when the parent is disposed.
+            Both also share the same <see cref="T:Chinook.DynamicMvvm.IDispatcher"/>.
+            A child can only be attached once to a single <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="TChildViewModel">The type of child viewmodel.</typeparam>
+            <param name="viewModel">The parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="childViewModel">The child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to attach.</param>
+            <param name="name">The child ViewModel's name. This defaults to <paramref name="childViewModel"/>.Name when not provided.</param>
+            <returns>The attached child <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.DetachChild(Chinook.DynamicMvvm.IViewModel,Chinook.DynamicMvvm.IViewModel,System.String)">
+            <summary>
+            Detaches a child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> from its parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            By being detached, the child will no longer be disposed when the parent is disposed.
+            The child's <see cref="T:Chinook.DynamicMvvm.IDispatcher"/> will also be removed.
+            </summary>
+            <param name="viewModel">The parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="childViewModel">The child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to detach.</param>
+            <param name="name">The child ViewModel's name. This defaults to <paramref name="childViewModel"/>.Name when not provided.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.AttachOrReplaceChild``1(Chinook.DynamicMvvm.IViewModel,``0,System.String)">
+            <summary>
+            Attaches a child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to a parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            If the child has already been attached, the newer instance will be attached instead of the previous instance.
+            By being attached, the child will be disposed when the parent is disposed.
+            Both also share the same <see cref="T:Chinook.DynamicMvvm.IDispatcher"/>.
+            </summary>
+            <remarks>The previous instance will be disposed when replaced.</remarks>
+            <param name="viewModel">The parent <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="childViewModel">The child <see cref="T:Chinook.DynamicMvvm.IViewModel"/> to detach.</param>
+            <param name="name">The child ViewModel's name. This defaults to <paramref name="childViewModel"/>.Name when not provided.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetCommand(Chinook.DynamicMvvm.IViewModel,System.Action,System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder},System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> that will execute
+            the specified <paramref name="execute"/> without any parameter.
+            </summary>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="execute">The command's execution delegate.</param>
+            <param name="configure">The optional function to configure the command builder.</param>
+            <param name="name">The command name.</param>
+            <returns>The attached <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetCommand``1(Chinook.DynamicMvvm.IViewModel,System.Action{``0},System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder},System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> that will execute
+            the specified <paramref name="execute"/> with a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+            <typeparam name="TParameter">The parameter type.</typeparam>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="execute">The command's execution delegate.</param>
+            <param name="configure">The optional function to configure the command builder.</param>
+            <param name="name">The command name.</param>
+            <returns>The attached <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetCommandFromTask(Chinook.DynamicMvvm.IViewModel,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task},System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder},System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> that will execute
+            the specified <paramref name="execute"/> without any parameter.
+            </summary>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="execute">The command's execution delegate.</param>
+            <param name="configure">The optional function to configure the command builder.</param>
+            <param name="name">The command name.</param>
+            <returns>The attached <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetCommandFromTask``1(Chinook.DynamicMvvm.IViewModel,System.Func{System.Threading.CancellationToken,``0,System.Threading.Tasks.Task},System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder},System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> that will execute
+            the specified <paramref name="execute"/> with a parameter of type <typeparamref name="TParameter"/>.
+            </summary>
+            <typeparam name="TParameter">The parameter type.</typeparam>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="execute">The command's execution delegate.</param>
+            <param name="configure">The optional function to configure the command builder.</param>
+            <param name="name">The command name.</param>
+            <returns>The attached <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetOrCreateCommand(Chinook.DynamicMvvm.IViewModel,System.String,System.Func{System.String,Chinook.DynamicMvvm.IDynamicCommandBuilder},System.Func{Chinook.DynamicMvvm.IDynamicCommandBuilder,Chinook.DynamicMvvm.IDynamicCommandBuilder})">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/> that will be attached to the <paramref name="viewModel"/>.
+            </summary>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="name">The command name.</param>
+            <param name="factory">The command factory.</param>
+            <param name="configure">The optional function to configure the command builder.</param>
+            <returns>The attached <see cref="T:Chinook.DynamicMvvm.IDynamicCommand"/>. Null is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetDynamicCommandBuilderFactory(Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Gets the <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory"/> for the <paramref name="viewModel"/>.
+            </summary>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicCommandBuilderFactory"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.TryGetDisposable``1(Chinook.DynamicMvvm.IViewModel,System.String,``0@)">
+            <summary>
+            Gets the typed <see cref="T:System.IDisposable"/> if it exists or default of <typeparamref name="TDisposable"/> otherwise.
+            </summary>
+            <typeparam name="TDisposable">The type of <see cref="T:System.IDisposable"/>.</typeparam>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="key">The key associated with the desired disposable.</param>
+            <param name="disposable">The disposable associated with <paramref name="key"/>.</param>
+            <returns>The typed disposable when the <paramref name="key"/> was found, or default of <typeparamref name="TDisposable"/> otherwise.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetOrCreateDisposable``1(Chinook.DynamicMvvm.IViewModel,System.String,System.Func{``0})">
+            <summary>
+            Gets the typed <see cref="T:System.IDisposable"/> associated with <paramref name="key"/>.
+            </summary>
+            <typeparam name="TDisposable">The type of <see cref="T:System.IDisposable"/>.</typeparam>
+            <param name="viewModel">This <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.</param>
+            <param name="key">The key associated with the desired disposable.</param>
+            <param name="create">The func used to create the <see cref="T:System.IDisposable"/>.</param>
+            <returns>The typed disposable associated with <paramref name="key"/>.</returns>
+            <exception cref="T:System.ArgumentNullException">When any of the parameters is null.</exception>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Get``1(Chinook.DynamicMvvm.IViewModel,Chinook.DynamicMvvm.IDynamicProperty)">
+            <summary>
+            Gets the value of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="property">The property.</param>
+            <returns>The property's value. Default of <typeparamref name="T"/> is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Get``1(Chinook.DynamicMvvm.IViewModel,Chinook.DynamicMvvm.IDynamicProperty{``0})">
+            <summary>
+            Gets the value of a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="property">The property.</param>
+            <returns>The property's value. Default of <typeparamref name="T"/> is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed or if <paramref name="property"/> is null.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Get``1(Chinook.DynamicMvvm.IViewModel,``0,System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="initialValue">The property's initial value.</param>
+            <param name="name">The property's name.</param>
+            <returns>The property's value.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Get``1(Chinook.DynamicMvvm.IViewModel,System.Func{``0},System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="initialValue">The property's initial value.</param>
+            <param name="name">The property's name.</param>
+            <returns>The property's value.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetFromTask``1(Chinook.DynamicMvvm.IViewModel,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.Task{``0}},``0,System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="source">The asynchronous value source of the property.</param>
+            <param name="initialValue">The property's initial value.</param>
+            <param name="name">The property's name.</param>
+            <returns>The property's value.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetFromObservable``1(Chinook.DynamicMvvm.IViewModel,System.IObservable{``0},``0,System.String)">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="source">The observable of values that feeds the property.</param>
+            <param name="initialValue">The property's initial value.</param>
+            <param name="name">The property's name.</param>
+            <returns>The property's value.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Set``1(Chinook.DynamicMvvm.IViewModel,``0,Chinook.DynamicMvvm.IDynamicProperty)">
+            <summary>
+            Sets the value of a property.
+            </summary>
+            <remarks>
+            Nothing happens if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.
+            </remarks>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="value">The value to set.</param>
+            <param name="property">The property to set.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.Set``1(Chinook.DynamicMvvm.IViewModel,``0,System.String)">
+            <summary>
+            Sets the value of a property.
+            If the property doesn't exist, it creates it.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="value">The value to set.</param>
+            <param name="name">The property's name.</param>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetProperty(Chinook.DynamicMvvm.IViewModel,System.String)">
+            <summary>
+            Gets or creates a property of the specified <paramref name="name"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="name">The property's name.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> with the specified <paramref name="name"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetProperty``1(Chinook.DynamicMvvm.IViewModel,System.String)">
+            <summary>
+            Gets or creates a property of the specified <paramref name="name"/>.
+            </summary>
+            <typeparam name="T">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="name">The property's name.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicProperty`1"/> with the specified <paramref name="name"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetProperty``2(``0,System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Gets or creates a <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> attached to this <see cref="T:Chinook.DynamicMvvm.IViewModel"/>.
+            </summary>
+            <typeparam name="TViewModel">The ViewModel type.</typeparam>
+            <typeparam name="TProperty">The property type.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="expression">The expression resolving the property.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> obtained via the <paramref name="expression"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetOrCreateDynamicProperty(Chinook.DynamicMvvm.IViewModel,System.String,System.Func{System.String,Chinook.DynamicMvvm.IDynamicProperty})">
+            <summary>
+            Gets or creates a property of the specified <paramref name="name"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="name">The property's name.</param>
+            <param name="factory">The property factory.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> matching the specified <paramref name="name"/>. Null is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetOrResolveProperty(Chinook.DynamicMvvm.IViewModel,System.String)">
+            <summary>
+            Gets or resolves a property of the specified <paramref name="name"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> owning the property.</param>
+            <param name="name">The property's name.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicProperty"/> matching the specified <paramref name="name"/>. Null is returned if the <see cref="T:Chinook.DynamicMvvm.IViewModel"/> is disposed.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetDynamicPropertyFactory(Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Gets the <see cref="T:Chinook.DynamicMvvm.IDynamicPropertyFactory"/> from the <paramref name="viewModel"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> providing the factory.</param>
+            <returns>The <see cref="T:Chinook.DynamicMvvm.IDynamicPropertyFactory"/>.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetService``1(Chinook.DynamicMvvm.IViewModel)">
+            <summary>
+            Returns the registered service of the specified type <typeparamref name="T"/>.
+            </summary>
+            <typeparam name="T">The desired type of service.</typeparam>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> providing the <see cref="T:System.IServiceProvider"/>.</param>
+            <returns>The registered service.</returns>
+        </member>
+        <member name="M:Chinook.DynamicMvvm.IViewModelExtensions.GetService(Chinook.DynamicMvvm.IViewModel,System.Type)">
+            <summary>
+            Returns the registered service of the specified <paramref name="type"/>.
+            </summary>
+            <param name="viewModel">The <see cref="T:Chinook.DynamicMvvm.IViewModel"/> providing the <see cref="T:System.IServiceProvider"/>.</param>
+            <param name="type">The desired type of service.</param>
+            <returns>The registered service.</returns>
+        </member>
+    </members>
+</doc>

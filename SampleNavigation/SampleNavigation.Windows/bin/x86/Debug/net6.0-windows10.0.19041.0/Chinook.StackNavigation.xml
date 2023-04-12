@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.StackNavigation</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.StackNavigation.BlindStackNavigator">
+            <summary>
+            This implementation of <see cref="T:Chinook.StackNavigation.IStackNavigator"/> doesn't deal with any view.
+            It's useful for unit testing.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.StackNavigation.BlindStackNavigator"/> class.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.GetLogger">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.InnerClear">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.InnerRemoveEntries(System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.InnerNavigateAndGetView(Chinook.StackNavigation.INavigableViewModel)">
+            <inheritdoc/>		
+        </member>
+        <member name="M:Chinook.StackNavigation.BlindStackNavigator.InnerNavigateBack(Chinook.StackNavigation.NavigationStackEntry,Chinook.StackNavigation.NavigationStackEntry)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorBase">
+            <summary>
+            This is a base class for <see cref="T:Chinook.StackNavigation.IStackNavigator"/> implementations.
+            This class does all the business logic to respect the <see cref="T:Chinook.StackNavigation.IStackNavigator"/> contract. 
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorBase._processingStateMutex">
+            <summary>The mutex to use when setting the <see cref="P:Chinook.StackNavigation.StackNavigatorBase.State"/> property to Processing.</summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorBase._logger">
+            <summary>
+            The logger to use for this class.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorBase._registrations">
+            <summary>
+            The type registrations mapping ViewModel types to View types.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.#ctor(System.Collections.Generic.IReadOnlyDictionary{System.Type,System.Type})">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.StackNavigation.StackNavigatorBase"/>.
+            </summary>
+            <param name="registrations">Mapping of view model types to their view types.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.GetLogger">
+            <summary>
+            Gets the logger for this class.
+            This method is abstract because we want the actual (not abstract) implementation to show up in the logs instead of <see cref="T:Chinook.StackNavigation.StackNavigatorBase"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorBase.State">
+            <inheritdoc/>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorBase.Stack">
+            <inheritdoc cref="P:Chinook.StackNavigation.StackNavigatorState.Stack"/>
+        </member>
+        <member name="E:Chinook.StackNavigation.StackNavigatorBase.StateChanged">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.Clear(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.InnerClear">
+            <summary>
+            Implementors must override this method to typically update the View layer.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.RemoveEntries(System.Threading.CancellationToken,System.Collections.Generic.IEnumerable{System.Int32})">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.InnerRemoveEntries(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Implementors must override this method to typically update the View layer.
+            </summary>
+            <param name="orderedIndexes">The list of indexes at which entries are being removed.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.Navigate(System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.InnerNavigateAndGetView(Chinook.StackNavigation.INavigableViewModel)">
+            <summary>
+            Implementors must override this method to typically update the View layer.
+            </summary>
+            <param name="viewModel">The view model instance of the navigation target.</param>
+            <returns>The view instance.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.NavigateBack(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.InnerNavigateBack(Chinook.StackNavigation.NavigationStackEntry,Chinook.StackNavigation.NavigationStackEntry)">
+            <summary>
+            Implementors must override this method to typically update the View layer.
+            </summary>
+            <param name="entryToRemove">The entry being removed.</param>
+            <param name="activeEntry">The entry becoming active.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorBase.ToString">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

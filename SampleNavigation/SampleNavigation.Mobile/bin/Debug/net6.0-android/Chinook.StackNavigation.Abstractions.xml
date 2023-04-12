@@ -1,0 +1,435 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.StackNavigation.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.StackNavigation.INavigableViewModel">
+            <summary>
+            This represents a ViewModel in the context of navigation.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.INavigableViewModel.SetView(System.Object)">
+            <summary>
+            This method is called by <see cref="T:Chinook.StackNavigation.IStackNavigator"/> implementations after forward navigations.
+            </summary>
+            <remarks>
+            The <paramref name="view"/> is typed as object to allow this interface to be available even in non-UI dependent librairies.
+            </remarks>
+            <param name="view">The view associated with the navigation. This is typically something inheriting from FrameworkElement.</param>
+        </member>
+        <member name="T:Chinook.StackNavigation.IStackNavigator">
+            <summary>
+            This represents a navigation controller for a single navigation stack.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.IStackNavigator.Navigate(System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <summary>
+            Navigates forward to a new page.
+            </summary>
+            <remarks>
+            When calling this method more than once in parallel, only the first invocation executes. Others are discarded.
+            </remarks>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <param name="request">The request containing the parameters navigation operation.</param>
+            <returns>The ViewModel instance of the active page after the navigation operation.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.IStackNavigator.NavigateBack(System.Threading.CancellationToken)">
+            <summary>
+            Navigates back to the previous page.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <returns>The ViewModel instance of the active page after the back operation.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.IStackNavigator.Clear(System.Threading.CancellationToken)">
+            <summary>
+            Clears the navigation stack.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.IStackNavigator.RemoveEntries(System.Threading.CancellationToken,System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Removes specific entries from the stack.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <param name="indexes">The indexes at which the entries must be removed.</param>
+        </member>
+        <member name="P:Chinook.StackNavigation.IStackNavigator.State">
+            <summary>
+            Represents the current state of this object.
+            You can observe its changes with the <see cref="E:Chinook.StackNavigation.IStackNavigator.StateChanged"/> event.
+            </summary>
+        </member>
+        <member name="E:Chinook.StackNavigation.IStackNavigator.StateChanged">
+            <summary>
+            Notifies changes related to the <see cref="P:Chinook.StackNavigation.IStackNavigator.State"/> property.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorExtensions">
+            <summary>
+            This class provides extension methods on the <see cref="T:Chinook.StackNavigation.IStackNavigator"/> type.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.CanNavigateBack(Chinook.StackNavigation.IStackNavigator)">
+            <summary>
+            Gets whether the navigator can navigate back.
+            </summary>
+            <param name="stackNavigator">The stack navigator.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.ProcessRequest(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <summary>
+            Processes a <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> based on its <see cref="T:Chinook.StackNavigation.StackNavigatorRequestType"/>.
+            </summary>
+            <param name="stackNavigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="request">The request to process.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <summary>
+            Navigates forward and clears the navigator's stack.
+            </summary>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelType">The type of the view model.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+            <returns>The instance of the newly</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <summary>
+            Navigates forward and clears the navigator's stack.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+            <returns>The instance of the newly</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <summary>
+            Navigates forward.
+            </summary>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelType">The type of the view model.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+            <returns>The ViewModel instance of the active page after the navigation operation.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <summary>
+            Navigates forward.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+            <returns>The ViewModel instance of the active page after the navigation operation.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.RemovePrevious(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Removes the previous ViewModel from this <see cref="T:Chinook.StackNavigation.IStackNavigator"/>' stack.
+            </summary>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.GetActiveViewModel(Chinook.StackNavigation.IStackNavigator)">
+            <summary>
+            Gets the ViewModel instance of the last item of this <see cref="T:Chinook.StackNavigation.IStackNavigator"/>'s stack.
+            </summary>
+            <param name="navigator">The stack navigator.</param>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type)">
+            <summary>
+            Tries to navigate back to the ViewModel matching <paramref name="viewModelType"/>.
+            </summary>
+            <remarks>
+            If no previous entry matches <paramref name="viewModelType"/>, nothing happens.
+            </remarks>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelType">The ViewModel type.</param>
+            <returns>True if the navigate back happened. False otherwise.</returns>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Tries to navigate back to the ViewModel matching <typeparamref name="TPageViewModel"/>.
+            </summary>
+            <remarks>
+            If no previous entry matches <typeparamref name="TPageViewModel"/>, nothing happens.
+            </remarks>
+            <typeparam name="TPageViewModel">The ViewModel type.</typeparam>
+            <param name="navigator">The stack navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <returns>True if the navigate back happened. False otherwise.</returns>
+        </member>
+        <member name="T:Chinook.StackNavigation.NavigationCanceledException">
+            <summary>
+            The exception thrown when navigation gets stopped.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.NavigationCanceledException.#ctor">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.StackNavigation.NavigationCanceledException"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.NavigationCanceledException.#ctor(System.String)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.StackNavigation.NavigationCanceledException"/>.
+            </summary>
+            <param name="message"><inheritdoc cref="M:System.OperationCanceledException.#ctor(System.String)"/></param>
+        </member>
+        <member name="M:Chinook.StackNavigation.NavigationCanceledException.#ctor(System.String,System.Exception)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.StackNavigation.NavigationCanceledException"/>.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The inner exception.</param>
+        </member>
+        <member name="T:Chinook.StackNavigation.NavigationStackEntry">
+            <summary>
+            Represents an entry in a <see cref="T:Chinook.StackNavigation.IStackNavigator"/>'s stack.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.NavigationStackEntry.#ctor(Chinook.StackNavigation.StackNavigatorRequest,Chinook.StackNavigation.INavigableViewModel,System.Object)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.StackNavigation.NavigationStackEntry"/>.
+            </summary>
+            <param name="request">The navigation request.</param>
+            <param name="viewModel">The ViewModel.</param>
+            <param name="view">The view.</param>
+        </member>
+        <member name="P:Chinook.StackNavigation.NavigationStackEntry.Request">
+            <summary>
+            Gets the request from which this instance was created.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.NavigationStackEntry.ViewModel">
+            <summary>
+            Gets the ViewModel instance created from <see cref="P:Chinook.StackNavigation.NavigationStackEntry.Request"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.NavigationStackEntry.View">
+            <summary>
+            Gets the view instance created from <see cref="P:Chinook.StackNavigation.NavigationStackEntry.Request"/>.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.NavigatorRequestState">
+            <summary>
+            This represents the various states of a navigator's request.
+            Navigators can only deal with 1 request at a time.
+            While a request is <see cref="F:Chinook.StackNavigation.NavigatorRequestState.Processing"/>, the navigator will not execute new request.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.NavigatorRequestState.Processing">
+            <summary>
+            The navigator is processing a request.
+            The request has not changed the navigator's state yet.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.NavigatorRequestState.Processed">
+            <summary>
+            The navigator finished processing its most recent request.
+            The request did change the navigator's state.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.NavigatorRequestState.FailedToProcess">
+            <summary>
+            The navigator failed to process its most recent request.
+            When this happens, the navigator's state is restored to what is was before the request.
+            However, side effects might have happened depending on the exception that occurred.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigationConfiguration">
+            <summary>
+            This class exposes the configuration for the <see cref="N:Chinook.StackNavigation"/> namespace.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigationConfiguration.LoggerFactory">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> used by all classes under the <see cref="N:Chinook.StackNavigation"/> namespace.
+            The default value is a <see cref="T:Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory"/> instance.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorRequestType">
+            <summary>
+            Represents the type of a <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/>.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward">
+            <summary>
+            Represents a forward navigation.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateBack">
+            <summary>
+            Represents a back navigation.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorRequestType.RemoveEntry">
+            <summary>
+            Represents a removal of existing navigation entries.
+            </summary>
+        </member>
+        <member name="F:Chinook.StackNavigation.StackNavigatorRequestType.Clear">
+            <summary>
+            Represents a removal of all existing navigations entries.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorRequest">
+            <summary>
+            Represents a navigation request for a <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.GetNavigateRequest(System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean,System.Boolean)">
+            <summary>
+            Gets a new <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for forward navigation.
+            </summary>
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})"/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.GetNavigateRequest``1(System.Func{``0},System.Boolean,System.Boolean)">
+            <summary>
+            Gets a new <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for forward navigation.
+            </summary>
+            <typeparam name="TViewModel">The type of ViewModel.</typeparam>
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})"/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.GetRemoveEntryRequest(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Gets a new <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for a <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.RemoveEntry"/> operation.
+            </summary>
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})"/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.GetClearRequest">
+            <summary>
+            Gets a new <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for a <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.Clear"/> operation.
+            </summary>
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})"/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.GetNavigateBackRequest">
+            <summary>
+            Gets a new <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for back navigation.
+            </summary>
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})"/>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.#ctor(Chinook.StackNavigation.StackNavigatorRequestType,System.Type,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Boolean},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            ­Initializes a new instance of the <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> class.
+            </summary>
+            <param name="requestType">The type of request.</param>
+            <param name="viewModelType">The type of the ViewModel.</param>
+            <param name="viewType">The type of the view.</param>
+            <param name="viewModelProvider">The function providing the ViewModel instance.</param>
+            <param name="suppressTransitions">Flag indicating whether to suppress the navigation transitions.</param>
+            <param name="clearBackStack">Flag indicating whether to clear the back stack.</param>
+            <param name="entryIndexesToRemove">The list of index to remove.</param>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType">
+            <summary>
+            Gets the type of navigation request that this instance represents.
+            This value indicates which other properties are meaningful for this instance.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.ViewModelType">
+            <summary>
+            Gets the type of ViewModel that will be instanciated by this request when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.ViewType">
+            <summary>
+            Gets the type of view that will be instanciated by this request when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.ViewModelProvider">
+            <summary>
+            Gets the method to invoke to instanciate the ViewModel when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.SuppressTransitions">
+            <summary>
+            Gets whether to suppress the view transition when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.ClearBackStack">
+            <summary>
+            Gets whether to clear the navigation stack when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.NavigateForward"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorRequest.EntryIndexesToRemove">
+            <summary>
+            Gets a list of <see cref="T:Chinook.StackNavigation.NavigationStackEntry"/> index to remove when <see cref="P:Chinook.StackNavigation.StackNavigatorRequest.RequestType"/> is <see cref="F:Chinook.StackNavigation.StackNavigatorRequestType.RemoveEntry"/>.
+            Null otherwise.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorRequest.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorState">
+            <summary>
+            Represents the state of a <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            This object is immutable.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorState.#ctor(System.Collections.Generic.IReadOnlyList{Chinook.StackNavigation.NavigationStackEntry},Chinook.StackNavigation.NavigatorRequestState,Chinook.StackNavigation.StackNavigatorRequest)">
+            <summary>
+            Initializes a new instance of <see cref="T:Chinook.StackNavigation.StackNavigatorState"/>.
+            </summary>
+            <param name="stack">The navigation stack.</param>
+            <param name="lastRequestState">The state of the last request.</param>
+            <param name="lastRequest">The last request.</param>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorState.Stack">
+            <summary>
+            Gets the list of navigation entries.
+            This represents the navigation stack.
+            The first item is the oldest entry and the last item is the active entry.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorState.LastRequestState">
+            <summary>
+            Gets the state of the most recent <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorState.LastRequest">
+            <summary>
+            Gets the most recent <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            </summary>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorStateChangedEventHandler">
+            <summary>
+            ­The event handler for the <see cref="E:Chinook.StackNavigation.IStackNavigator.StateChanged"/> event.
+            </summary>
+            <param name="sender">The sender that raises the event.</param>
+            <param name="args">The event arguments.</param>
+        </member>
+        <member name="T:Chinook.StackNavigation.StackNavigatorEventArgs">
+            <summary>
+            The event arguments for the <see cref="E:Chinook.StackNavigation.IStackNavigator.StateChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Chinook.StackNavigation.StackNavigatorEventArgs.#ctor(Chinook.StackNavigation.StackNavigatorState,Chinook.StackNavigation.StackNavigatorState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.StackNavigation.StackNavigatorEventArgs"/> class.
+            </summary>
+            <param name="previousState">The previous state of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.</param>
+            <param name="currentState">The current state of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.</param>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorEventArgs.PreviousState">
+            <summary>
+            Gets the previous state of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.StackNavigation.StackNavigatorEventArgs.CurrentState">
+            <summary>
+            Gets the previous state of the <see cref="T:Chinook.StackNavigation.IStackNavigator"/>.
+            </summary>
+        </member>
+    </members>
+</doc>

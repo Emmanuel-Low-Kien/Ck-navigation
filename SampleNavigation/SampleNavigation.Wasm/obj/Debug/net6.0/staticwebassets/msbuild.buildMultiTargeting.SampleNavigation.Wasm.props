@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\SampleNavigation.Wasm.props" />
+</Project>

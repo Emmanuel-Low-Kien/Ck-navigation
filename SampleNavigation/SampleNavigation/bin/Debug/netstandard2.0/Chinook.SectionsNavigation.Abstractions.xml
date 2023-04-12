@@ -1,0 +1,618 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chinook.SectionsNavigation.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Chinook.SectionsNavigation.IModalStackNavigator">
+            <summary>
+            This represents a modal navigation stack in the context of a sections navigator.
+            It's a modal of an <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.IModalStackNavigator.Priority">
+            <summary>
+            Gets the priority of the modal.
+            </summary>
+            <remarks>
+            The priority defines the precedence when there are multiple modals.
+            The modal with the highest priority is the one returned by <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorState.ActiveModal"/>.
+            </remarks>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.IModalStackNavigator.Name">
+            <summary>
+            Gets the name of this navigator stack.
+            </summary>
+            <remarks>
+            This is used for mapping purposes.
+            </remarks>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.IModalStackNavigator.CloseModalTransitionInfo">
+            <summary>
+            Gets the default transition info for the future close modal operation.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.ModalStackNavigatorExtensions">
+            <summary>
+            This class provides extension methods on the <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/> type.
+            </summary>
+            <remarks>
+            This class forwards all method calls to <see cref="T:Chinook.StackNavigation.StackNavigatorExtensions"/>.
+            The purpose of this class is to offer the same extensions on <see cref="T:Chinook.StackNavigation.IStackNavigator"/>, but in the <see cref="N:Chinook.SectionsNavigation"/> namespace.
+            </remarks>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.CanNavigateBack(Chinook.SectionsNavigation.IModalStackNavigator)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.CanNavigateBack(Chinook.StackNavigation.IStackNavigator)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.ProcessRequest(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.ProcessRequest(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.NavigateAndClear(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.NavigateAndClear``1(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.Navigate(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.Navigate``1(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.RemovePrevious(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.RemovePrevious(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.GetActiveViewModel(Chinook.SectionsNavigation.IModalStackNavigator)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.GetActiveViewModel(Chinook.StackNavigation.IStackNavigator)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.TryNavigateBackTo(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken,System.Type)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ModalStackNavigatorExtensions.TryNavigateBackTo``1(Chinook.SectionsNavigation.IModalStackNavigator,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.ISectionsNavigator">
+            <summary>
+            This represents a navigator that has multiple navigation stacks.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ISectionsNavigator.OpenModal(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <summary>
+            Creates and opens a new modal.
+            Calling this adds an item in <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorState.Modals"/>.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <param name="request">The request containing the parameters for the new modal.</param>
+            <returns>The newly created secton navigator.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ISectionsNavigator.SetActiveSection(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <summary>
+            Sets the active section.
+            The active section is the one a user currently interacts with.
+            Modals are displayed on top of sections.
+            The inactive sections can still be interacted with programmatically.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <param name="request">The request containing the section name to set as active.</param>
+            <returns>The active section after the set operation.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.ISectionsNavigator.CloseModal(System.Threading.CancellationToken,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <summary>
+            Closes a modal.
+            </summary>
+            <param name="ct">The cancellation token; note that cancellation is checked only at the very start of the execution.</param>
+            <param name="request">The request containing the modal priority.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ISectionsNavigator.State">
+            <summary>
+            Gets the state of this object.
+            Changes to this property can be observed using <see cref="E:Chinook.SectionsNavigation.ISectionsNavigator.StateChanged"/>.
+            </summary>
+        </member>
+        <member name="E:Chinook.SectionsNavigation.ISectionsNavigator.StateChanged">
+            <summary>
+            Notifies changes related to the <see cref="P:Chinook.SectionsNavigation.ISectionsNavigator.State"/> property.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorExtensions">
+            <summary>
+            This class provides extension methods on the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> type.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.SetActiveSection(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.String)">
+            <summary>
+            Sets the active section using the provided section name.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="sectionName">The name of the section to set as active.</param>
+            <returns>The stack navigator of the active section.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.SetActiveSection(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.String,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <summary>
+            Sets the active section using the provided section name and navigates.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="sectionName">The name of the section to set as active.</param>
+            <param name="viewModelType">The type of the view model.</param>
+            <param name="viewModelProvider">The method to make the view model instance. It will be invoked only if necessary.</param>
+            <param name="returnToRoot">When this is true, the navigator will navigate back to the view model matching the <paramref name="viewModelType"/>.</param>
+            <returns>The stack navigator of the active section.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.SetActiveSection``1(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.String,System.Func{``0},System.Boolean)">
+            <summary>
+            Sets the active section using the provided section name and navigates.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="sectionName">The name of the section to set as active.</param>
+            <param name="viewModelProvider">The method to make the view model instance. It will be invoked only if necessary.</param>
+            <param name="returnToRoot">When this is true, the navigator will navigate back to the view model matching the type <typeparamref name="TViewModel"/>.</param>
+            <returns>The stack navigator of the active section.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.CloseModal(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Closes the top-most modal.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.CanNavigateBackOrCloseModal(Chinook.SectionsNavigation.ISectionsNavigator)">
+            <summary>
+            Gets whether the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> can navigate back or close a modal.
+            </summary>
+            <remarks>
+            This is useful when dealing with hardware back buttons.
+            </remarks>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <returns>True if the navigator can navigate back or close a modal. False otherwise.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.NavigateBackOrCloseModal(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Executes back action depending on top-most frame state.
+            </summary>
+            <remarks>
+            Priorities:
+            <list type="number">
+            <item>Navigates back within the modal, if possible.</item>
+            <item>Closes the modal, if possible.</item>
+            <item>Navigates back within a section.</item>
+            </list>
+            This is useful when dealing with hardware back buttons.
+            </remarks>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.GetActiveStackNavigator(Chinook.SectionsNavigation.ISectionsNavigator)">
+            <summary>
+            Gets the active <see cref="T:Chinook.StackNavigation.IStackNavigator"/> of this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+            <remarks>
+            The result can be null if no navigator is active.
+            </remarks>
+            <param name="sectionsNavigator">The sections navigator.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.NavigateAndClear(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelType">The ViewModel type.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.NavigateAndClear``1(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.Navigate(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelType">The ViewModel type.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.Navigate``1(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+            <param name="viewModelProvider">The method to invoke to instanciate the ViewModel.</param>
+            <param name="suppressTransition">Whether to suppress the navigation transition.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.NavigateBack(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.IStackNavigator.NavigateBack(System.Threading.CancellationToken)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.RemovePrevious(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.RemovePrevious(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct">The cancellation token.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.GetActiveViewModel(Chinook.SectionsNavigation.ISectionsNavigator)">
+            <summary>
+            Calls <see cref="M:Chinook.StackNavigation.StackNavigatorExtensions.GetActiveViewModel(Chinook.StackNavigation.IStackNavigator)"/> on this <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>'s active stack navigator.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.OpenModal(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Opens a new modal.
+            </summary>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct"></param>
+            <param name="viewModelType">The type of the view model.</param>
+            <param name="viewModelProvider">The method invoked to instanciate the new ViewModel.</param>
+            <param name="priority">The modal's priority.</param>
+            <param name="name">The modal's name.</param>
+            <returns>The newly created ViewModel instance.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorExtensions.OpenModal``1(Chinook.SectionsNavigation.ISectionsNavigator,System.Threading.CancellationToken,System.Func{``0},System.Nullable{System.Int32},System.String)">
+            <summary>
+            Opens a new modal.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <param name="sectionsNavigator">The sections navigator.</param>
+            <param name="ct"></param>
+            <param name="viewModelProvider">The method invoked to instanciate the new ViewModel.</param>
+            <param name="priority">The modal's priority.</param>
+            <param name="name">The modal's name.</param>
+            <returns>The newly created ViewModel instance.</returns>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.ISectionStackNavigator">
+            <summary>
+            This represents a navigation stack in the context of a sections navigator.
+            It's a section of an <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.ISectionStackNavigator.Name">
+            <summary>
+            Gets the name of the section.
+            </summary>
+            <remarks>
+            This name can be used to retrieve this instance from <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorState.Sections"/> mapping.
+            </remarks>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionStackNavigatorExtensions">
+            <summary>
+            This class provides extension methods on the <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> type.
+            </summary>
+            <remarks>
+            This class forwards all method calls to <see cref="T:Chinook.StackNavigation.StackNavigatorExtensions"/>.
+            The purpose of this class is to offer the same extensions on <see cref="T:Chinook.StackNavigation.IStackNavigator"/>, but in the <see cref="N:Chinook.SectionsNavigation"/> namespace.
+            </remarks>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.CanNavigateBack(Chinook.SectionsNavigation.ISectionStackNavigator)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.CanNavigateBack(Chinook.StackNavigation.IStackNavigator)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.ProcessRequest(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.ProcessRequest(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,Chinook.StackNavigation.StackNavigatorRequest)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.NavigateAndClear(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.NavigateAndClear``1(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.NavigateAndClear``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.Navigate(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type,System.Func{Chinook.StackNavigation.INavigableViewModel},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.Navigate``1(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.Navigate``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Func{``0},System.Boolean)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.RemovePrevious(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.RemovePrevious(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.GetActiveViewModel(Chinook.SectionsNavigation.ISectionStackNavigator)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.GetActiveViewModel(Chinook.StackNavigation.IStackNavigator)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.TryNavigateBackTo(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken,System.Type)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken,System.Type)"/>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionStackNavigatorExtensions.TryNavigateBackTo``1(Chinook.SectionsNavigation.ISectionStackNavigator,System.Threading.CancellationToken)">
+            <inheritdoc cref="M:Chinook.StackNavigation.StackNavigatorExtensions.TryNavigateBackTo``1(Chinook.StackNavigation.IStackNavigator,System.Threading.CancellationToken)"/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigationConfiguration">
+            <summary>
+            This class exposes the configuration for the <see cref="N:Chinook.SectionsNavigation"/> namespace.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigationConfiguration.LoggerFactory">
+            <summary>
+            Gets or sets the <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory"/> used by all classes under the <see cref="N:Chinook.SectionsNavigation"/> namespace.
+            The default value is a <see cref="T:Microsoft.Extensions.Logging.Abstractions.NullLoggerFactory"/> instance.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorRequestType">
+            <summary>
+            Represents the type of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/>.
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.OpenModal">
+            <summary>
+            This is the request type when opening a new modal.
+            <list type="bullet">
+            	<listheader><term>Relevant <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> properties</term></listheader>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalName"/> (Optional)</item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalPriority"/> (Optional)</item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.NewModalStackNavigationRequest"/></item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo"/> (Optional)</item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.NewModalClosingTransitionInfo"/> (Optional)</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.SetActiveSection">
+            <summary>
+            This is the request type when changing the active section.
+            <list type="bullet">
+            	<listheader><term>Relevant <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> properties</term></listheader>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.SectionName"/></item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo"/> (Optional)</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.CloseModal">
+            <summary>
+            This is the request type when closing a modal.
+            <list type="bullet">
+            	<listheader><term>Relevant <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> properties</term></listheader>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalName"/> (Optional)</item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalPriority"/> (Optional)</item>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo"/> (Optional)</item>
+            </list>
+            </summary>
+        </member>
+        <member name="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.ReportSectionStateChanged">
+            <summary>
+            This is the request type when a <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> reacts to a request from one of its <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> or <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/>.
+            The only thing the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> does with this is report the event using its <see cref="P:Chinook.SectionsNavigation.ISectionsNavigator.State"/> and <see cref="E:Chinook.SectionsNavigation.ISectionsNavigator.StateChanged"/> members.
+            <list type="bullet">
+            	<listheader><term>Relevant <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> properties</term></listheader>
+            	<item><see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.SectionName"/></item>
+            </list>
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorRequest">
+            <summary>
+            Represents the request to be executed by a <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorRequest.GetSetActiveSectionRequest(System.String,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Create a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> of type <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.SetActiveSection"/>.
+            </summary>
+            <param name="sectionName">The section name.</param>
+            <param name="transitionInfo">The optional transition info.</param>
+            <returns>The newly created request.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorRequest.GetOpenModalRequest(Chinook.StackNavigation.StackNavigatorRequest,System.String,System.Nullable{System.Int32},Chinook.SectionsNavigation.SectionsTransitionInfo,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Create a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> of type <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.OpenModal"/>.
+            </summary>
+            <param name="newModalStackNavigationRequest">The initial <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for the new <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/>.</param>
+            <param name="modalName">The optional modal name.</param>
+            <param name="modalPriority">The optional modal priority.</param>
+            <param name="transitionInfo">The optional transition info.</param>
+            <param name="newModalClosingTransitionInfo">The optional transition info for the future close modal request.</param>
+            <returns>The newly created request.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorRequest.GetCloseModalRequest(System.String,System.Nullable{System.Int32},Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Create a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> of type <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.CloseModal"/>.
+            </summary>
+            <param name="modalName">The optional modal name.</param>
+            <param name="modalPriority">The optional modal priority.</param>
+            <param name="transitionInfo">The optional transition info.</param>
+            <returns>The newly created request.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorRequest.#ctor(Chinook.SectionsNavigation.SectionsNavigatorRequestType,System.String,System.String,System.Nullable{System.Int32},Chinook.StackNavigation.StackNavigatorRequest,Chinook.SectionsNavigation.SectionsTransitionInfo,Chinook.SectionsNavigation.SectionsTransitionInfo)">
+            <summary>
+            Creates a new instance of <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/>.
+            </summary>
+            <param name="requestType">The type of request.</param>
+            <param name="sectionName">The sections name associated to this request.</param>
+            <param name="modalName">The modal name associated to this request.</param>
+            <param name="modalPriority">The modal priority associated to this request.</param>
+            <param name="newModalStackNavigationRequest">The <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> associated to this request.</param>
+            <param name="transitionInfo">The transition info of this request.</param>
+            <param name="newModalClosingTransitionInfo">The default transiton info of the future close modal request.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.RequestType">
+            <summary>
+            Gets the type of section navigator request that this instance represents.
+            This value indicates which other properties are meaningful for this instance.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.SectionName">
+            <summary>
+            Gets the name of the <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> associated with this request.
+            This is null when this request is assocated with a modal.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalName">
+            <summary>
+            Gets the name of the <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/> associated with this request.
+            <br></br>When setting this to null and opening a modal, a generated name will be used.
+            <br></br>When setting this to null and closing a modal, the <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalPriority"/> will be used to find the modal.
+            <br></br>This is null when this request is associated with a non-modal section.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.ModalPriority">
+            <summary>
+            Gets the priority of the <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/> associated with this request.
+            The higher priority modals will mask lower priority ones.
+            <br></br>When setting this to null and opening a modal, the current highest modal's priority + 1 will be used.
+            <br></br>When setting this to null and closing a modal, the current highest modal's priority will be used.
+            <br></br>This is null when this request is associated with a non-modal section.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.NewModalStackNavigationRequest">
+            <summary>
+            Gets the <see cref="T:Chinook.StackNavigation.StackNavigatorRequest"/> for the newly created modal.
+            This request is processed before the new modal becomes active.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo">
+            <summary>
+            Gets the <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo"/> for the operation.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.NewModalClosingTransitionInfo">
+            <summary>
+            Gets the <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorRequest.TransitionInfo"/> for the future close modal operation of the newly created modal.
+            </summary>
+            <remarks>
+            The open and close transitions should be correlated so it's very useful to define the close transition as you open the modal. 
+            </remarks>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorRequest.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorState">
+            <summary>
+            This objects represents the state of a <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            This object is immutable.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorState.#ctor(System.Collections.Generic.IReadOnlyDictionary{System.String,Chinook.SectionsNavigation.ISectionStackNavigator},Chinook.SectionsNavigation.ISectionStackNavigator,System.Collections.Generic.IReadOnlyList{Chinook.SectionsNavigation.IModalStackNavigator},Chinook.StackNavigation.NavigatorRequestState,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/> class.
+            </summary>
+            <param name="sections">The list of sections.</param>
+            <param name="activeSection">The active section.</param>
+            <param name="modals">The list of modals.</param>
+            <param name="lastRequestState">The state of the last request.</param>
+            <param name="lastRequest">The last request.</param>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorState.#ctor(Chinook.SectionsNavigation.SectionsNavigatorState,Chinook.StackNavigation.NavigatorRequestState,Chinook.SectionsNavigation.SectionsNavigatorRequest)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/> class.
+            </summary>
+            <param name="state">Another <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/> instance from which to copy the sections and modals.</param>
+            <param name="lastRequestState">The state of the last request.</param>
+            <param name="lastRequest">The last request.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.Sections">
+            <summary>
+            Gets a dictionary of <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> instances, mapped by their <see cref="P:Chinook.SectionsNavigation.ISectionStackNavigator.Name"/> property.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.ActiveSection">
+            <summary>
+            Gets the <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> instance that is currently active.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.Modals">
+            <summary>
+            Gets an ordered list of <see cref="T:Chinook.SectionsNavigation.IModalStackNavigator"/> representing the modal stack. The last item is the active modal.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.ActiveModal">
+            <summary>
+            Gets the <see cref="T:Chinook.SectionsNavigation.ISectionStackNavigator"/> instance that is currently active.
+            The active modal takes precedence over the <see cref="P:Chinook.SectionsNavigation.SectionsNavigatorState.ActiveSection"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.LastRequestState">
+            <summary>
+            Gets the state of the most recent <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorState.LastRequest">
+            <summary>
+            Gets the most recent <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorRequest"/> of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions">
+            <summary>
+            This class provides extension methods on the <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/> type.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions.GetActiveStackNavigator(Chinook.SectionsNavigation.SectionsNavigatorState)">
+            <summary>
+            Gets the active <see cref="T:Chinook.StackNavigation.IStackNavigator"/> of this <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/>.
+            The result can be null is no navigator is active.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions.GetLastViewModelType(Chinook.SectionsNavigation.SectionsNavigatorState)">
+            <summary>
+            Gets the ViewModel type of the last item of the active <see cref="T:Chinook.StackNavigation.IStackNavigator"/> of this <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/>.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions.HasActiveViewModel(Chinook.SectionsNavigation.SectionsNavigatorState)">
+            <summary>
+            Gets whether there is an active ViewModel in a <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorState"/>.
+            </summary>
+            <param name="sectionsNavigatorState"></param>
+            <returns>True if there is an active ViewModel. False otherwise.</returns>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions.GetNextViewModelType(Chinook.SectionsNavigation.SectionsNavigatorState)">
+            <summary>
+            Gets the type of the next page ViewModel assuming the current <paramref name="sectionsNavigatorState"/> has a <see cref="F:Chinook.StackNavigation.NavigatorRequestState.Processing"/> request.
+            Since the next page doesn't exist at that time, it's calculated using the request's type, parameters, and the current state.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorStateExtensions.IsStackNavigatorFromSectionsRequestActive(Chinook.SectionsNavigation.SectionsNavigatorState,Chinook.StackNavigation.IStackNavigator@)">
+            <summary>
+            Gets whether the navigator from a <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.ReportSectionStateChanged"/> request is active.
+            </summary>
+            <param name="sectionsNavigatorState"></param>
+            <param name="stackNavigator">The stack navigator that caused the <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.ReportSectionStateChanged"/> request if it's active. Null otherwhise.</param>
+            <returns>Returns true when the <see cref="T:Chinook.StackNavigation.IStackNavigator"/> that caused the current <see cref="F:Chinook.SectionsNavigation.SectionsNavigatorRequestType.ReportSectionStateChanged"/> is currently active. False otherwise.</returns>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorStateChangedEventHandler">
+            <summary>
+            ­The event handler for the <see cref="E:Chinook.SectionsNavigation.ISectionsNavigator.StateChanged"/> event.
+            </summary>
+            <param name="sender">The sender that raises the event.</param>
+            <param name="args">The event arguments.</param>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsNavigatorEventArgs">
+            <summary>
+            The event arguments for the <see cref="E:Chinook.SectionsNavigation.ISectionsNavigator.StateChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:Chinook.SectionsNavigation.SectionsNavigatorEventArgs.#ctor(Chinook.SectionsNavigation.SectionsNavigatorState,Chinook.SectionsNavigation.SectionsNavigatorState)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Chinook.SectionsNavigation.SectionsNavigatorEventArgs"/> class.
+            </summary>
+            <param name="previousState">The previous state of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.</param>
+            <param name="currentState">The current state of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.</param>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorEventArgs.PreviousState">
+            <summary>
+            Gets the previous state of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="P:Chinook.SectionsNavigation.SectionsNavigatorEventArgs.CurrentState">
+            <summary>
+            Gets the current state of the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/>.
+            </summary>
+        </member>
+        <member name="T:Chinook.SectionsNavigation.SectionsTransitionInfo">
+            <summary>
+            Represents additional transition information to pass to the <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> implementation.
+            </summary>
+            <remarks>
+            Packages implementing <see cref="T:Chinook.SectionsNavigation.ISectionsNavigator"/> should provide implementations.
+            </remarks>
+        </member>
+    </members>
+</doc>
